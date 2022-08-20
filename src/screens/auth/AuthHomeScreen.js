@@ -1,10 +1,26 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
+import { Button } from "../../components/Button";
 
-export const AuthHomeScreen = () => {
+export const AuthHomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text>Auth Home Screen</Text>
+      <Button
+        type="secondary"
+        onPress={() => {
+          navigation.navigate("Login");
+        }}
+      >
+        Login
+      </Button>
+      <Button
+        type="secondary"
+        onPress={() => {
+          navigation.navigate("Signup");
+        }}
+      >
+        Sign Up
+      </Button>
     </View>
   );
 };
