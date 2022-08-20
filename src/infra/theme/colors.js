@@ -1,5 +1,6 @@
 export const colors = {
   primary: { main: "#4A1FB8", light: "#EBE9FE" },
+  background: "#F5F5F5",
   danger: "#F97066",
   icon: {
     light: "#666666",
