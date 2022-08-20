@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { AuthContext } from "../../provider/auth";
 import { AuthNavigator } from "./auth.navigator";
+import { HomeNavigator } from "./home.navigator";
 
 export const Navigation = () => {
   const auth = useContext(AuthContext);
@@ -9,7 +10,7 @@ export const Navigation = () => {
 
   return (
     <NavigationContainer>
-      {user === true ? <AuthNavigator /> : <AuthNavigator />}
+      {user === true ? <HomeNavigator /> : <HomeNavigator />}
     </NavigationContainer>
   );
 };
