@@ -3,6 +3,7 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View, Text } from "react-native";
 import styled, { ThemeProvider } from "styled-components/native";
 import { theme } from "./src/infra/theme";
+import { Button } from "./src/components/Button";
 
 import {
   useFonts as useInterFont,
@@ -18,7 +19,6 @@ import {
 } from "@expo-google-fonts/poppins";
 
 const Title = styled(Text)`
-  padding: 16px;
   color: ${(props) => props.theme.colors.primary};
   font-family: ${(props) => props.theme.fonts.pageHeading};
   font-size: ${(props) => props.theme.fontSizes.title};
@@ -44,7 +44,9 @@ export default function App() {
     <>
       <ThemeProvider theme={theme}>
         <View style={styles.container}>
-          <Title>Hello</Title>
+          <Button>View All</Button>
+          <Button type="secondary">View All</Button>
+          <Button type="danger">Delete</Button>
           <StatusBar style="auto" />
         </View>
       </ThemeProvider>
@@ -55,7 +57,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: theme.colors.background,
     alignItems: "center",
     justifyContent: "center",
   },

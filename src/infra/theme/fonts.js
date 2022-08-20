@@ -1,6 +1,7 @@
 export const fonts = {
   pageHeading: "Poppins_800ExtraBold",
   pageTitle: "Poppins_700Bold",
+  buttonText: "Poppins_700Bold",
   cardTitle: "Inter_500Medium",
   cardSubtitle: "Inter_600SemiBold",
   secondaryHeading: "Poppins_600SemiBold",
@@ -15,8 +16,8 @@ export const fontWeights = {
 };
 
 export const fontSizes = {
-  cardSubtitle: "15px",
-  cardTitle: "17px",
-  pageHeading: "22px",
-  title: "34px",
+  sm: "15px",
+  md: "17px",
+  lg: "22px",
+  xl: "34px",
 };
