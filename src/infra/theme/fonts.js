@@ -15,8 +15,8 @@ export const fontWeights = {
 };
 
 export const fontSizes = {
-  cardSubtitle: 15,
-  cardTitle: 17,
-  pageHeading: 22,
-  title: 34,
+  cardSubtitle: "15px",
+  cardTitle: "17px",
+  pageHeading: "22px",
+  title: "34px",
 };
