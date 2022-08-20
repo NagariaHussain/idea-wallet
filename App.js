@@ -44,7 +44,13 @@ export default function App() {
     <>
       <ThemeProvider theme={theme}>
         <View style={styles.container}>
-          <Button>View All</Button>
+          <Button
+            onPress={() => {
+              console.log("Hello");
+            }}
+          >
+            View All
+          </Button>
           <Button type="secondary">View All</Button>
           <Button type="danger">Delete</Button>
           <StatusBar style="auto" />

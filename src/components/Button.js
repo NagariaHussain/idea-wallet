@@ -2,7 +2,9 @@ import React from "react";
 import { Pressable, Text } from "react-native";
 import styled from "styled-components/native";
 
-const BaseButtonContainer = styled(Pressable)`
+const BaseButtonContainer = styled(Pressable).attrs((props) => ({
+  android_ripple: { color: props.theme.colors.primary.light },
+}))`
   border-radius: ${({ theme }) => theme.sizes.borderRadius.sm};
 `;
 
@@ -36,7 +38,7 @@ const SecondaryButtonText = styled(BaseButtonText)`
   color: ${({ theme }) => theme.colors.typography.pageTitle};
 `;
 
-export const Button = ({ children, type }) => {
+export const Button = ({ children, type, onPress }) => {
   let ButtonContainer;
   let ButtonText;
 
@@ -53,7 +55,7 @@ export const Button = ({ children, type }) => {
 
   return (
     <>
-      <ButtonContainer>
+      <ButtonContainer onPress={onPress}>
         <ButtonText>{children}</ButtonText>
       </ButtonContainer>
     </>
