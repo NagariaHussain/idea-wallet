@@ -3,7 +3,7 @@ import { Pressable, Text } from "react-native";
 import styled from "styled-components/native";
 
 const BaseButtonContainer = styled(Pressable)`
-  border-radius: 10px;
+  border-radius: ${({ theme }) => theme.sizes.borderRadius.sm};
 `;
 
 const PrimaryButtonContainer = styled(BaseButtonContainer)`
