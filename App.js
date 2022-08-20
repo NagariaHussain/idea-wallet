@@ -1,9 +1,7 @@
 import React from "react";
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, Text } from "react-native";
-import styled, { ThemeProvider } from "styled-components/native";
+import { ThemeProvider } from "styled-components/native";
 import { theme } from "./src/infra/theme";
-import { Button } from "./src/components/Button";
+import { Navigation } from "./src/infra/navigation";
 
 import {
   useFonts as useInterFont,
@@ -17,12 +15,6 @@ import {
   Poppins_800ExtraBold,
   Poppins_600SemiBold,
 } from "@expo-google-fonts/poppins";
-
-const Title = styled(Text)`
-  color: ${(props) => props.theme.colors.primary};
-  font-family: ${(props) => props.theme.fonts.pageHeading};
-  font-size: ${(props) => props.theme.fontSizes.title};
-`;
 
 export default function App() {
   const [interLoaded] = useInterFont({
@@ -43,28 +35,8 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <View style={styles.container}>
-          <Button
-            onPress={() => {
-              console.log("Hello");
-            }}
-          >
-            View All
-          </Button>
-          <Button type="secondary">View All</Button>
-          <Button type="danger">Delete</Button>
-          <StatusBar style="auto" />
-        </View>
+        <Navigation />
       </ThemeProvider>
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: theme.colors.background,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
