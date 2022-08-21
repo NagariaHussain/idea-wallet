@@ -5,12 +5,11 @@ import { AuthNavigator } from "./auth.navigator";
 import { HomeNavigator } from "./home.navigator";
 
 export const Navigation = () => {
-  const auth = useContext(AuthContext);
-  const user = auth.user;
+  const { isAuthenticated } = useContext(AuthContext);
 
   return (
     <NavigationContainer>
-      {user === true ? <HomeNavigator /> : <AuthNavigator />}
+      {isAuthenticated === true ? <HomeNavigator /> : <AuthNavigator />}
     </NavigationContainer>
   );
 };

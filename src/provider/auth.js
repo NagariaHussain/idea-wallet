@@ -5,31 +5,31 @@ import { supabase } from "../lib/supabase";
 const AuthContext = createContext({});
 
 const AuthProvider = (props) => {
-  const [user, setUser] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(null);
   const [session, setSession] = useState(null);
 
   useEffect(() => {
     const supabaseSession = supabase.auth.session();
     setSession(supabaseSession);
-    setUser(supabaseSession ? true : false);
+    setIsAuthenticated(supabaseSession ? true : false);
 
     const { data: authListener } = supabase.auth.onAuthStateChange(
       async (event, s) => {
         console.log(`Supabase auth event: ${event}`);
         setSession(s);
-        setUser(s ? true : false);
+        setIsAuthenticated(s ? true : false);
       }
     );
 
     return () => {
       authListener.unsubscribe();
     };
-  }, [user]);
+  }, [isAuthenticated]);
 
   return (
     <AuthContext.Provider
       value={{
-        user,
+        isAuthenticated,
         session,
       }}
     >
