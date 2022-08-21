@@ -9,6 +9,7 @@ export const colors = {
   typography: {
     pageTitle: "#363636",
     heading: "#1D1D1D",
+    cardCaption: "#B7B7B7",
   },
   stroke: {
     main: "#D2D2D2",

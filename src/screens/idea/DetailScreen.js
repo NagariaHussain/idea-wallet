@@ -1,10 +1,12 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-export const IdeaDetailScreen = () => {
+export const IdeaDetailScreen = ({ route }) => {
+  const ideaId = route.params.ideaId;
+
   return (
     <View style={styles.container}>
-      <Text>Idea Detail Screen</Text>
+      <Text>Idea: {ideaId}</Text>
     </View>
   );
 };

@@ -1,0 +1,63 @@
+import React from "react";
+import { Pressable, View } from "react-native";
+import RightArrow from "../icons/RightArrow";
+
+import styled from "styled-components";
+import { useNavigation } from "@react-navigation/native";
+
+const ItemContainer = styled.View`
+  width: 100%;
+  padding: 18px 14px;
+  background-color: white;
+  border-radius: ${({ theme }) => theme.sizes.borderRadius.xs};
+  border: 1px solid ${({ theme }) => theme.colors.stroke.main};
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+`;
+
+const Emoji = styled.Text`
+  font-size: ${({ theme }) => theme.fontSizes.md};
+`;
+
+const IdeaTitle = styled.Text`
+  font-family: ${({ theme }) => theme.fonts.cardTitle};
+  font-size: ${({ theme }) => theme.fontSizes.md};
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
+`;
+
+const CreatedText = styled.Text`
+  font-family: ${({ theme }) => theme.fonts.cardSubtitle};
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
+  color: ${({ theme }) => theme.colors.typography.cardCaption};
+`;
+
+export const IdeaListItem = ({ ideaData }) => {
+  const navigation = useNavigation();
+  const { emoji, title, createdAt, id: ideaId } = ideaData;
+  return (
+    <Pressable onPress={() => navigation.push("IdeaDetail", { ideaId })}>
+      <ItemContainer>
+        <View style={{ display: "flex", flexDirection: "row" }}>
+          <Emoji>{emoji}</Emoji>
+          <View style={{ marginLeft: 10 }}></View>
+          <IdeaTitle>{title}</IdeaTitle>
+        </View>
+
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          <CreatedText createdAt={createdAt}>a minute ago</CreatedText>
+          <View style={{ marginLeft: 14 }}></View>
+          <RightArrow />
+        </View>
+      </ItemContainer>
+    </Pressable>
+  );
+};

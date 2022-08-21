@@ -1,19 +1,22 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import styled from "styled-components";
+import { IdeaListItem } from "../components/idea/ListItem";
+
+const PageFrame = styled.View`
+  margin: 10px 24px;
+`;
 
 export const Dashboard = () => {
   return (
-    <View style={styles.container}>
-      <Text>Dashboard</Text>
-    </View>
+    <PageFrame>
+      <IdeaListItem
+        ideaData={{
+          emoji: "🚀",
+          title: "New Idea App",
+          createdAt: "",
+          id: "00767",
+        }}
+      />
+    </PageFrame>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "white",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
