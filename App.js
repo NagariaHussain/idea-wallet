@@ -16,6 +16,7 @@ import {
   Poppins_600SemiBold,
 } from "@expo-google-fonts/poppins";
 import { AuthProvider } from "./src/provider/auth";
+import { SafeAreaView } from "react-native";
 
 export default function App() {
   const [interLoaded] = useInterFont({
@@ -37,7 +38,9 @@ export default function App() {
     <>
       <ThemeProvider theme={theme}>
         <AuthProvider>
-          <Navigation />
+          <SafeAreaView style={{ flex: 1 }}>
+            <Navigation />
+          </SafeAreaView>
         </AuthProvider>
       </ThemeProvider>
     </>
