@@ -1,7 +1,7 @@
 import React from "react";
 import { Pressable, View } from "react-native";
 import RightArrow from "../icons/RightArrow";
-
+import Row from "../utils/Row";
 import styled from "styled-components";
 import { useNavigation } from "@react-navigation/native";
 
@@ -40,23 +40,17 @@ export const IdeaListItem = ({ ideaData }) => {
   return (
     <Pressable onPress={() => navigation.push("IdeaDetail", { ideaId })}>
       <ItemContainer>
-        <View style={{ display: "flex", flexDirection: "row" }}>
+        <Row>
           <Emoji>{emoji}</Emoji>
           <View style={{ marginLeft: 10 }}></View>
           <IdeaTitle>{title}</IdeaTitle>
-        </View>
+        </Row>
 
-        <View
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-          }}
-        >
+        <Row>
           <CreatedText createdAt={createdAt}>a minute ago</CreatedText>
           <View style={{ marginLeft: 14 }}></View>
           <RightArrow />
-        </View>
+        </Row>
       </ItemContainer>
     </Pressable>
   );
