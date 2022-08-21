@@ -38,9 +38,11 @@ const SecondaryButtonText = styled(BaseButtonText)`
   color: ${({ theme }) => theme.colors.typography.pageTitle};
 `;
 
-export const Button = ({ children, type, onPress }) => {
+export const Button = (props) => {
   let ButtonContainer;
   let ButtonText;
+
+  const { type, children } = props;
 
   if (type === "secondary") {
     ButtonContainer = SecondaryButtonContainer;
@@ -55,7 +57,7 @@ export const Button = ({ children, type, onPress }) => {
 
   return (
     <>
-      <ButtonContainer onPress={onPress}>
+      <ButtonContainer {...props}>
         <ButtonText>{children}</ButtonText>
       </ButtonContainer>
     </>

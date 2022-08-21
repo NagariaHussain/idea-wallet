@@ -1,7 +1,6 @@
 // Based On: https://github.com/codingki/react-native-expo-template/blob/master/template-typescript-bottom-tabs-supabase-auth-flow/src/provider/AuthProvider.tsx
 import React, { createContext, useState, useEffect } from "react";
 import { supabase } from "../lib/supabase";
-import { Session } from "@supabase/supabase-js";
 
 const AuthContext = createContext({});
 
@@ -15,10 +14,10 @@ const AuthProvider = (props) => {
     setUser(supabaseSession ? true : false);
 
     const { data: authListener } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
+      async (event, s) => {
         console.log(`Supabase auth event: ${event}`);
-        setSession(session);
-        setUser(session ? true : false);
+        setSession(s);
+        setUser(s ? true : false);
       }
     );
 

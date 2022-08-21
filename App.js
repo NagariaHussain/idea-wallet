@@ -15,6 +15,7 @@ import {
   Poppins_800ExtraBold,
   Poppins_600SemiBold,
 } from "@expo-google-fonts/poppins";
+import { AuthProvider } from "./src/provider/auth";
 
 export default function App() {
   const [interLoaded] = useInterFont({
@@ -35,7 +36,9 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <Navigation />
+        <AuthProvider>
+          <Navigation />
+        </AuthProvider>
       </ThemeProvider>
     </>
   );

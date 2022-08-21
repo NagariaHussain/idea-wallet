@@ -10,7 +10,7 @@ export const Navigation = () => {
 
   return (
     <NavigationContainer>
-      {user === true ? <HomeNavigator /> : <HomeNavigator />}
+      {user === true ? <HomeNavigator /> : <AuthNavigator />}
     </NavigationContainer>
   );
 };
