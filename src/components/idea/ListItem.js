@@ -1,7 +1,7 @@
 import React from "react";
 import { Pressable, View } from "react-native";
 import RightArrow from "../icons/RightArrow";
-import Row from "../utils/Row";
+import { Row, CenteredRow } from "../utils/Row";
 import styled from "styled-components";
 import { useNavigation } from "@react-navigation/native";
 
@@ -46,11 +46,11 @@ export const IdeaListItem = ({ ideaData }) => {
           <IdeaTitle>{title}</IdeaTitle>
         </Row>
 
-        <Row>
+        <CenteredRow>
           <CreatedText createdAt={createdAt}>a minute ago</CreatedText>
           <View style={{ marginLeft: 14 }}></View>
           <RightArrow />
-        </Row>
+        </CenteredRow>
       </ItemContainer>
     </Pressable>
   );
