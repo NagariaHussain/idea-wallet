@@ -1,0 +1,30 @@
+import React from "react";
+import { View } from "react-native";
+import styled from "styled-components";
+import { CardTitle, CardContainer, CardSubtitle } from "../utils/Card";
+
+const CategoryCardContainer = styled(CardContainer)`
+  padding: 10px 22px 24px 16px;
+  align-self: stretch;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const CategoryEmoji = styled.Text`
+  font-size: ${({ theme }) => theme.fontSizes.xl};
+  margin-top: 32px;
+`;
+
+export const IdeaCategoryCard = ({ categoryData }) => {
+  const { title, noOfIdeas, emoji } = categoryData;
+  return (
+    <CategoryCardContainer>
+      <View>
+        <CardSubtitle>{noOfIdeas} Ideas</CardSubtitle>
+        <View style={{ marginTop: 10 }}></View>
+        <CardTitle>{title}</CardTitle>
+      </View>
+      <CategoryEmoji>{emoji}</CategoryEmoji>
+    </CategoryCardContainer>
+  );
+};
