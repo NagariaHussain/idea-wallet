@@ -12,3 +12,9 @@ export const CardSubtitle = styled.Text`
   font-weight: ${({ theme }) => theme.fontWeights.semiBold};
   color: ${({ theme }) => theme.colors.typography.cardCaption};
 `;
+
+export const CardContainer = styled.View`
+  border: 1px solid ${({ theme }) => theme.colors.stroke.main};
+  border-radius: ${({ theme }) => theme.sizes.borderRadius.xs};
+  background-color: white;
+`;

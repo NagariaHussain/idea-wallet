@@ -4,14 +4,11 @@ import RightArrow from "../icons/RightArrow";
 import { Row, CenteredRow } from "../utils/Row";
 import styled from "styled-components";
 import { useNavigation } from "@react-navigation/native";
-import { CardSubtitle, CardTitle } from "../utils/Card";
+import { CardSubtitle, CardTitle, CardContainer } from "../utils/Card";
 
-const ItemContainer = styled.View`
+const ItemContainer = styled(CardContainer)`
   width: 100%;
   padding: 18px 14px;
-  background-color: white;
-  border-radius: ${({ theme }) => theme.sizes.borderRadius.xs};
-  border: 1px solid ${({ theme }) => theme.colors.stroke.main};
   display: flex;
   flex-direction: row;
   justify-content: space-between;
