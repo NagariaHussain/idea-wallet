@@ -4,6 +4,7 @@ import RightArrow from "../icons/RightArrow";
 import { Row, CenteredRow } from "../utils/Row";
 import styled from "styled-components";
 import { useNavigation } from "@react-navigation/native";
+import { CardTitle } from "../utils/CardTitle";
 
 const ItemContainer = styled.View`
   width: 100%;
@@ -19,12 +20,6 @@ const ItemContainer = styled.View`
 
 const Emoji = styled.Text`
   font-size: ${({ theme }) => theme.fontSizes.md};
-`;
-
-const IdeaTitle = styled.Text`
-  font-family: ${({ theme }) => theme.fonts.cardTitle};
-  font-size: ${({ theme }) => theme.fontSizes.md};
-  font-weight: ${({ theme }) => theme.fontWeights.medium};
 `;
 
 const CreatedText = styled.Text`
@@ -43,7 +38,7 @@ export const IdeaListItem = ({ ideaData }) => {
         <Row>
           <Emoji>{emoji}</Emoji>
           <View style={{ marginLeft: 10 }}></View>
-          <IdeaTitle>{title}</IdeaTitle>
+          <CardTitle>{title}</CardTitle>
         </Row>
 
         <CenteredRow>
