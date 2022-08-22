@@ -28,6 +28,7 @@ export const Dashboard = () => {
             emoji: "🍿",
             title: "Business",
             noOfIdeas: 3,
+            id: 764,
           }}
         />
         <IdeaCategoryCard
@@ -35,6 +36,7 @@ export const Dashboard = () => {
             emoji: "📖",
             title: "College",
             noOfIdeas: 8,
+            id: 467,
           }}
         />
         <IdeaCategoryCard
@@ -42,6 +44,7 @@ export const Dashboard = () => {
             emoji: "😆",
             title: "Fun",
             noOfIdeas: 12,
+            id: 483,
           }}
         />
       </CenteredRow>

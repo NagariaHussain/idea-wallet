@@ -1,10 +1,12 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-export const IdeaCategoryScreen = () => {
+export const IdeaCategoryScreen = ({ route }) => {
+  const { categoryId } = route.params;
+
   return (
     <View style={styles.container}>
-      <Text>Category Screen</Text>
+      <Text>Category: {categoryId}</Text>
     </View>
   );
 };

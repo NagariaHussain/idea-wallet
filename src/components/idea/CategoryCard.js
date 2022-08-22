@@ -1,5 +1,6 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { View } from "react-native";
+import { Pressable, View } from "react-native";
 import styled from "styled-components";
 import { CardTitle, CardContainer, CardSubtitle } from "../utils/Card";
 
@@ -16,15 +17,21 @@ const CategoryEmoji = styled.Text`
 `;
 
 export const IdeaCategoryCard = ({ categoryData }) => {
-  const { title, noOfIdeas, emoji } = categoryData;
+  const { title, noOfIdeas, emoji, id: categoryId } = categoryData;
+  const navigation = useNavigation();
+
   return (
-    <CategoryCardContainer>
-      <View>
-        <CardSubtitle>{noOfIdeas} Ideas</CardSubtitle>
-        <View style={{ marginTop: 10 }}></View>
-        <CardTitle>{title}</CardTitle>
-      </View>
-      <CategoryEmoji>{emoji}</CategoryEmoji>
-    </CategoryCardContainer>
+    <Pressable
+      onPress={() => navigation.push("IdeaCategoryScreen", { categoryId })}
+    >
+      <CategoryCardContainer>
+        <View>
+          <CardSubtitle>{noOfIdeas} Ideas</CardSubtitle>
+          <View style={{ marginTop: 10 }}></View>
+          <CardTitle>{title}</CardTitle>
+        </View>
+        <CategoryEmoji>{emoji}</CategoryEmoji>
+      </CategoryCardContainer>
+    </Pressable>
   );
 };
