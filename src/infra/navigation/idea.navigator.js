@@ -9,7 +9,11 @@ const Stack = createNativeStackNavigator();
 
 export const IdeaNavigator = () => (
   <Stack.Navigator>
-    <Stack.Screen name="IdeaDashboard" component={Dashboard} />
+    <Stack.Screen
+      options={{ headerShown: false }}
+      name="IdeaDashboard"
+      component={Dashboard}
+    />
     <Stack.Screen name="IdeaDetail" component={IdeaDetailScreen} />
     <Stack.Screen name="IdeaCategoryScreen" component={IdeaCategoryScreen} />
   </Stack.Navigator>
