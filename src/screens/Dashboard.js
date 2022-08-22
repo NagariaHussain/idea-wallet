@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { IdeaCategoryCard } from "../components/idea/CategoryCard";
+import { CategorySelectMenu } from "../components/idea/CategorySelect";
 import { IdeaListItem } from "../components/idea/ListItem";
 import { CenteredRow } from "../components/utils/Row";
 
@@ -48,6 +49,10 @@ export const Dashboard = () => {
           }}
         />
       </CenteredRow>
+
+      <PageFrame />
+
+      <CategorySelectMenu />
     </PageFrame>
   );
 };
