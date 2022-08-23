@@ -18,6 +18,14 @@ import {
 } from "@expo-google-fonts/poppins";
 import { AuthProvider } from "./src/provider/auth";
 import { SafeAreaView } from "react-native";
+import styled from "styled-components";
+
+const AlertMessage = styled(FlashMessage)`
+  background-color: ${(props) => props.theme.colors.primary.main};
+  border-radius: ${(props) => props.theme.sizes.borderRadius.sm};
+  width: 50%;
+  align-self: center;
+`;
 
 export default function App() {
   const [interLoaded] = useInterFont({
@@ -43,8 +51,8 @@ export default function App() {
             <Navigation />
           </SafeAreaView>
         </AuthProvider>
+        <AlertMessage position="top" />
       </ThemeProvider>
-      <FlashMessage position="top" />
     </>
   );
 }
