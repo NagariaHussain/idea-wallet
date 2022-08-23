@@ -5,6 +5,24 @@ import { CategorySelectMenu } from "../components/idea/CategorySelect";
 import { IdeaListItem } from "../components/idea/ListItem";
 import { CenteredRow } from "../components/utils/Row";
 
+const categories = [
+  {
+    title: "Fun",
+    emoji: "😆",
+    id: 483,
+  },
+  {
+    title: "College",
+    emoji: "📖",
+    id: 467,
+  },
+  {
+    title: "Business",
+    emoji: "🍿",
+    id: 764,
+  },
+];
+
 const PageFrame = styled.View`
   margin: 10px 24px;
 `;
@@ -52,7 +70,10 @@ export const Dashboard = () => {
 
       <PageFrame />
 
-      <CategorySelectMenu />
+      <CategorySelectMenu
+        onChange={(data) => console.log(data)}
+        categories={categories}
+      />
     </PageFrame>
   );
 };

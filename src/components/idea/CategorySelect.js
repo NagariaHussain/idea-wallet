@@ -1,61 +1,67 @@
 import React, { useState } from "react";
-import { Text, View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
-import styled from "styled-components";
-import { Row } from "../utils/Row";
+import styled from "styled-components/native";
+import { CenteredRow } from "../utils/Row";
+import { theme } from "../../infra/theme";
 
-const data = [
-  {
-    title: "Fun",
-    emoji: "😆",
-    id: 483,
-  },
-  {
-    title: "College",
-    emoji: "📖",
-    id: 467,
-  },
-  {
-    title: "Business",
-    emoji: "🍿",
-    id: 764,
-  },
-];
-
-const MenuItemRow = styled(Row)`
+const MenuItemRow = styled(CenteredRow)`
   padding: 12px 10px 12px 18px;
+`;
+
+const MenuSelectedText = styled.Text`
+  font-size: ${(props) => props.theme.fontSizes.md};
+  font-weight: ${(props) => props.theme.fontWeights.medium};
+  font-family: ${(props) => props.theme.fonts.cardTitle};
+`;
+
+const MenuItemEmoji = styled.Text`
+  font-size: ${(props) => props.theme.fontSizes.lg};
 `;
 
 const renderMenuItem = (item) => {
   return (
     <MenuItemRow>
-      <Text>{item.emoji}</Text>
+      <MenuItemEmoji>{item.emoji}</MenuItemEmoji>
       <View style={{ marginLeft: 8 }}></View>
-      <Text>{item.title}</Text>
+      <MenuSelectedText>{item.title}</MenuSelectedText>
     </MenuItemRow>
   );
 };
 
 const DropdownMenu = styled(Dropdown)`
-  border: 1px solid ${({ theme }) => theme.colors.stroke.main};
-  border-radius: ${({ theme }) => theme.sizes.borderRadius.xs};
+  border: 1px solid ${(props) => props.theme.colors.stroke.main};
+  border-radius: ${(props) => props.theme.sizes.borderRadius.xs};
   background-color: white;
   padding: 12px 10px 12px 18px;
 `;
 
-export const CategorySelectMenu = () => {
-  const [value, setValue] = useState(null);
+export const CategorySelectMenu = (props) => {
+  const [value, setValue] = useState(props?.categories[0]);
 
   return (
     <DropdownMenu
       onChange={(item) => {
-        console.log(item.title);
-        setValue(item.value);
+        props.onChange(item);
+        setValue(item);
       }}
       labelField="title"
       valueField="id"
       renderItem={renderMenuItem}
-      data={data}
+      data={props.categories}
+      value={value}
+      placeholderStyle={styles.menuBoxText}
+      selectedTextStyle={styles.menuBoxText}
+      renderLeftIcon={() => <MenuItemEmoji>{value.emoji}</MenuItemEmoji>}
     />
   );
 };
+
+const styles = StyleSheet.create({
+  menuBoxText: {
+    fontFamily: theme.fonts.cardTitle,
+    fontWeight: theme.fontWeights.medium,
+    fontSize: theme.fontSizes.md,
+    marginLeft: 8,
+  },
+});
