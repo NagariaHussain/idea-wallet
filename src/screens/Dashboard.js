@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { IdeaCategoryCard } from "../components/idea/CategoryCard";
 import { CategorySelectMenu } from "../components/idea/CategorySelect";
+import { LinkAttachment } from "../components/idea/LinkAttachment";
 import { IdeaListItem } from "../components/idea/ListItem";
 import { CenteredRow } from "../components/utils/Row";
 
@@ -74,6 +75,10 @@ export const Dashboard = () => {
         onChange={(data) => console.log(data)}
         categories={categories}
       />
+
+      <PageFrame />
+
+      <LinkAttachment linkData={{ link: "https://google.com" }} />
     </PageFrame>
   );
 };

@@ -2,6 +2,7 @@ import React from "react";
 import { ThemeProvider } from "styled-components/native";
 import { theme } from "./src/infra/theme";
 import { Navigation } from "./src/infra/navigation";
+import FlashMessage from "react-native-flash-message";
 
 import {
   useFonts as useInterFont,
@@ -43,6 +44,7 @@ export default function App() {
           </SafeAreaView>
         </AuthProvider>
       </ThemeProvider>
+      <FlashMessage position="top" />
     </>
   );
 }
