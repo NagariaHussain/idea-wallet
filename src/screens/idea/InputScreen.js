@@ -9,7 +9,7 @@ const ButtonRow = styled(CenteredRow)`
   align-items: stretch;
 `;
 
-const ButtonEmoji = styled.Text`
+const Emoji = styled.Text`
   font-size: ${({ theme }) => theme.fontSizes.lg};
 `;
 
@@ -17,25 +17,42 @@ const PageFrame = styled.View`
   margin: 10px 24px;
 `;
 
+const ButtonEmoji = () => <Emoji>🚀</Emoji>;
+
+const actions = [
+  {
+    icon: ButtonEmoji,
+    onPress: () => console.log("emoji picker pressed."),
+  },
+  {
+    icon: Icons.LinkIcon,
+    onPress: () => console.log("link pressed."),
+  },
+  {
+    icon: Icons.MicIcon,
+    onPress: () => console.log("mic pressed."),
+  },
+  {
+    icon: Icons.PencilIcon,
+    onPress: () => console.log("pencil pressed."),
+  },
+  {
+    icon: Icons.CameraIcon,
+    onPress: () => console.log("camera pressed."),
+  },
+];
+
 export const IdeaInputScreen = () => {
   return (
     <PageFrame>
       <ButtonRow>
-        <CircularButton>
-          <ButtonEmoji>🚀</ButtonEmoji>
-        </CircularButton>
-        <CircularButton>
-          <Icons.LinkIcon />
-        </CircularButton>
-        <CircularButton>
-          <Icons.MicIcon />
-        </CircularButton>
-        <CircularButton>
-          <Icons.PencilIcon />
-        </CircularButton>
-        <CircularButton>
-          <Icons.CameraIcon />
-        </CircularButton>
+        {actions.map((item, idx) => {
+          return (
+            <CircularButton key={idx} onPress={item.onPress}>
+              {item.icon}
+            </CircularButton>
+          );
+        })}
       </ButtonRow>
     </PageFrame>
   );
