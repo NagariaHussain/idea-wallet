@@ -67,3 +67,11 @@ export const Button = (props) => {
 Button.defaultProps = {
   type: "primary",
 };
+
+export const CircularButton = styled(Pressable)`
+  padding: 15px;
+  border: 1px solid ${({ theme }) => theme.colors.stroke.main};
+  border-radius: 100%;
+  background-color: white;
+  justify-content: center;
+`;
