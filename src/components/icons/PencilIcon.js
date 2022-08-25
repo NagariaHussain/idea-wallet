@@ -1,7 +1,7 @@
 import * as React from "react";
 import Svg, { Path } from "react-native-svg";
 
-export const Pencil = (props) => (
+export const PencilIcon = (props) => (
   <Svg
     width={22}
     height={22}
