@@ -16,6 +16,7 @@ import {
   Poppins_800ExtraBold,
   Poppins_600SemiBold,
 } from "@expo-google-fonts/poppins";
+
 import { AuthProvider } from "./src/provider/auth";
 import { SafeAreaView } from "react-native";
 import styled from "styled-components";

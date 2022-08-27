@@ -4,13 +4,16 @@ import { Icons } from "../../components/icons";
 import { CenteredRow } from "../../components/utils/Row";
 import { CircularButton, circularPrimaryButton } from "../../components/Button";
 import { TextInput, View, Keyboard } from "react-native";
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withTiming,
+  withSpring,
+} from "react-native-reanimated";
 import { launchCameraAndGetImage } from "../../lib/camera";
 import { EmojiPicker } from "../../components/utils/emojiPicker";
 
-const FAB = styled(circularPrimaryButton)`
-  position: absolute;
-  right: 0;
-`;
+const FAB = styled(circularPrimaryButton)``;
 
 const ButtonRow = styled(CenteredRow)`
   justify-content: space-between;
@@ -47,14 +50,25 @@ export const IdeaInputScreen = () => {
   const [image, setImage] = useState(null);
   const [selectedEmoji, setSelectedEmoji] = useState("🚀");
   const [ideaTitle, setIdeaTitle] = useState("");
-  const [keyboardHeight, setKeyboardHeight] = useState(0);
+
+  // Animated Floating Action Button
+  const FABBottomPosition = useSharedValue(20);
+  const FABAnimatedStyles = useAnimatedStyle(() => {
+    return {
+      bottom: FABBottomPosition.value,
+      position: "absolute",
+      right: 0,
+    };
+  });
 
   useEffect(() => {
     const showSubscription = Keyboard.addListener("keyboardDidShow", (e) => {
-      setKeyboardHeight(e.endCoordinates.height - 50);
+      FABBottomPosition.value = withTiming(e.endCoordinates.height - 30);
     });
-    const hideSubscription = Keyboard.addListener("keyboardDidHide", (e) => {
-      setKeyboardHeight(0);
+    const hideSubscription = Keyboard.addListener("keyboardDidHide", () => {
+      FABBottomPosition.value = withSpring(20, {
+        restDisplacementThreshold: 0.001,
+      });
     });
 
     return () => {
@@ -126,9 +140,11 @@ export const IdeaInputScreen = () => {
         <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
       )} */}
 
-      <FAB style={{ bottom: 20 + keyboardHeight }} onPress={Keyboard.dismiss}>
-        <Icons.CheckIcon />
-      </FAB>
+      <Animated.View style={FABAnimatedStyles}>
+        <FAB onPress={Keyboard.dismiss}>
+          <Icons.CheckIcon />
+        </FAB>
+      </Animated.View>
     </PageFrame>
   );
 };
