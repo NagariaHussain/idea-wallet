@@ -57,7 +57,7 @@ export const IdeaInputScreen = () => {
               onPress={async () => {
                 const i = await launchCameraAndGetImage();
                 console.log("Image picked: ", i);
-                setImage(i.uri);
+                i && setImage(i.uri);
               }}
             >
               {item.icon}
