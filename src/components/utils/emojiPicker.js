@@ -1,28 +1,33 @@
 import React, { useState } from "react";
 import { gemoji } from "gemoji"; // GitHub Emojis!
 import Popover from "react-native-popover-view";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
-import { CenteredRow } from "./Row";
+import { Text, TouchableOpacity, View } from "react-native";
 import styled from "styled-components";
+import { FlashList } from "@shopify/flash-list";
 
 const EmojiOption = styled(Text)`
   font-size: ${({ theme }) => theme.fontSizes.xl};
 `;
 
-const PickerContainer = styled(ScrollView)`
-  padding: 10px;
+const PickerContainer = styled(View)`
+  padding: 15px 10px;
   height: 250px;
-  width: "100%";
+  width: 300px;
 `;
 
 export const EmojiPicker = ({ children, onPick }) => {
-  const [showPopover, setShowPopover] = useState(true);
+  const [showPopover, setShowPopover] = useState(false);
 
   return (
     <Popover
       isVisible={showPopover}
       onRequestClose={() => setShowPopover(false)}
-      popoverStyle={{ flex: 1 }}
+      popoverStyle={{
+        flex: 1,
+        borderRadius: 12,
+        padding: 0,
+        justifyContent: "center",
+      }}
       from={
         <View>
           <TouchableOpacity
@@ -37,20 +42,37 @@ export const EmojiPicker = ({ children, onPick }) => {
       }
     >
       <PickerContainer>
-        <CenteredRow style={{ flexWrap: "wrap" }}>
-          {gemoji.slice(100, 200).map(({ emoji }, idx) => (
+        <FlashList
+          data={gemoji}
+          renderItem={({ item }) => (
             <TouchableOpacity
-              key={idx}
               onPress={() => {
-                onPick(emoji, idx);
+                onPick(item.emoji);
                 setShowPopover(false);
               }}
             >
-              <EmojiOption>{emoji}</EmojiOption>
+              <EmojiOption>{item.emoji}</EmojiOption>
             </TouchableOpacity>
-          ))}
-        </CenteredRow>
+          )}
+          estimatedItemSize={22}
+          numColumns={5}
+        />
       </PickerContainer>
     </Popover>
   );
 };
+
+// Before Flash List
+// <CenteredRow style={{ flexWrap: "wrap" }}>
+// {gemoji.slice(100, 200).map(({ emoji }, idx) => (
+// <TouchableOpacity
+//   key={idx}
+//   onPress={() => {
+//     onPick(emoji, idx);
+//     setShowPopover(false);
+//   }}
+// >
+//   <EmojiOption>{emoji}</EmojiOption>
+// </TouchableOpacity>
+// ))}
+// </CenteredRow>

@@ -23,3 +23,7 @@
 - Flash Messages
 
 ## The Emoji Picker
+
+- Popover
+- gemoji
+- Performant List using Flash list
