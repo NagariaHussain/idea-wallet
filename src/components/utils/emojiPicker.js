@@ -51,7 +51,9 @@ export const EmojiPicker = ({ children, onPick }) => {
                 setShowPopover(false);
               }}
             >
-              <EmojiOption>{item.emoji}</EmojiOption>
+              <EmojiOption accessibilityLabel={item.description}>
+                {item.emoji}
+              </EmojiOption>
             </TouchableOpacity>
           )}
           estimatedItemSize={22}
