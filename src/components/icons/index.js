@@ -8,6 +8,7 @@ import { RightArrowIcon } from "./RightArrow";
 import { SettingsIcon } from "./SettingsIcon";
 import { TrashCanIcon } from "./TrashCanIcon";
 import { ZapIcon } from "./ZapIcon";
+import { CheckIcon } from "./CheckIcon";
 
 export const Icons = {
   CameraIcon,
@@ -20,4 +21,5 @@ export const Icons = {
   SettingsIcon,
   TrashCanIcon,
   ZapIcon,
+  CheckIcon
 };

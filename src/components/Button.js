@@ -75,3 +75,9 @@ export const CircularButton = styled(Pressable)`
   background-color: white;
   justify-content: center;
 `;
+
+export const circularPrimaryButton = styled(CircularButton)`
+  border: 1px solid transparent;
+  background-color: ${({ theme }) => theme.colors.primary.main};
+  color: "white";
+`;

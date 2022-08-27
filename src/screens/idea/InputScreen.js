@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled, { useTheme } from "styled-components";
 import { Icons } from "../../components/icons";
 import { CenteredRow } from "../../components/utils/Row";
-import { CircularButton } from "../../components/Button";
-import { Image, TextInput, View } from "react-native";
+import { CircularButton, circularPrimaryButton } from "../../components/Button";
+import { TextInput, View, Keyboard } from "react-native";
 import { launchCameraAndGetImage } from "../../lib/camera";
 import { EmojiPicker } from "../../components/utils/emojiPicker";
+
+const FAB = styled(circularPrimaryButton)`
+  position: absolute;
+  right: 0;
+`;
 
 const ButtonRow = styled(CenteredRow)`
   justify-content: space-between;
@@ -18,6 +23,7 @@ const Emoji = styled.Text`
 
 const PageFrame = styled.View`
   margin: 10px 24px;
+  flex: 1;
 `;
 
 const IdeaInputBox = styled(TextInput)`
@@ -41,6 +47,24 @@ export const IdeaInputScreen = () => {
   const [image, setImage] = useState(null);
   const [selectedEmoji, setSelectedEmoji] = useState("🚀");
   const [ideaTitle, setIdeaTitle] = useState("");
+  const [keyboardStatus, setKeyboardStatus] = useState(undefined);
+  const [keyboardHeight, setKeyboardHeight] = useState(0);
+
+  useEffect(() => {
+    const showSubscription = Keyboard.addListener("keyboardDidShow", (e) => {
+      setKeyboardHeight(e.endCoordinates.height - 50);
+      setKeyboardStatus("shown");
+    });
+    const hideSubscription = Keyboard.addListener("keyboardDidHide", (e) => {
+      setKeyboardHeight(0);
+      setKeyboardStatus("hidden");
+    });
+
+    return () => {
+      showSubscription.remove();
+      hideSubscription.remove();
+    };
+  }, []);
 
   const actions = [
     {
@@ -49,7 +73,7 @@ export const IdeaInputScreen = () => {
     },
     {
       icon: Icons.MicIcon,
-      onPress: () => console.log("mic pressed."),
+      onPress: () => Keyboard.dismiss(),
     },
     {
       icon: Icons.PencilIcon,
@@ -87,22 +111,27 @@ export const IdeaInputScreen = () => {
           );
         })}
       </ButtonRow>
+
       <View style={{ marginTop: 100 }}></View>
 
       <IdeaInputBox
         autoFocus
         multiline={true}
         selectionColor={theme.colors.typography.pageTitle}
-        placeholder="Your Awesome Idea.."
+        placeholder={keyboardStatus}
         textAlign="center"
         value={ideaTitle}
         onChangeText={setIdeaTitle}
         textAlignVertical="center"
       />
 
-      {image && (
+      {/* {image && (
         <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
-      )}
+      )} */}
+
+      <FAB style={{ bottom: 20 + keyboardHeight }} onPress={Keyboard.dismiss}>
+        <Icons.CheckIcon />
+      </FAB>
     </PageFrame>
   );
 };

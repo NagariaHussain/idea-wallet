@@ -27,3 +27,5 @@
 - Popover
 - gemoji
 - Performant List using Flash list
+
+FAB Button based on: <https://snack.expo.dev/@andypandy/animated-button-above-keyboard?platform=ios>
