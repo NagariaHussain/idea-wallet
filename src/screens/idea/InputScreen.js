@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { Icons } from "../../components/icons";
 import { CenteredRow } from "../../components/utils/Row";
 import { CircularButton } from "../../components/Button";
-import { Image, View } from "react-native";
+import { Image, TextInput, View } from "react-native";
 import { launchCameraAndGetImage } from "../../lib/camera";
 import { EmojiPicker } from "../../components/utils/emojiPicker";
 
@@ -20,6 +20,13 @@ const PageFrame = styled.View`
   margin: 10px 24px;
 `;
 
+const IdeaInputBox = styled(TextInput)`
+  font-size: ${({ theme }) => theme.fontSizes.xl};
+  font-family: ${({ theme }) => theme.fonts.pageHeading};
+  align-self: center;
+  max-height: 200px;
+`;
+
 const EmojiButton = styled.View`
   padding: 15px;
   border: 1px solid ${({ theme }) => theme.colors.stroke.main};
@@ -29,8 +36,11 @@ const EmojiButton = styled.View`
 `;
 
 export const IdeaInputScreen = () => {
+  const theme = useTheme();
+
   const [image, setImage] = useState(null);
   const [selectedEmoji, setSelectedEmoji] = useState("🚀");
+  const [ideaTitle, setIdeaTitle] = useState("");
 
   const actions = [
     {
@@ -77,7 +87,19 @@ export const IdeaInputScreen = () => {
           );
         })}
       </ButtonRow>
-      <View style={{ marginTop: 20 }}></View>
+      <View style={{ marginTop: 100 }}></View>
+
+      <IdeaInputBox
+        autoFocus
+        multiline={true}
+        selectionColor={theme.colors.typography.pageTitle}
+        placeholder="Your Awesome Idea.."
+        textAlign="center"
+        value={ideaTitle}
+        onChangeText={setIdeaTitle}
+        textAlignVertical="center"
+      />
+
       {image && (
         <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
       )}
