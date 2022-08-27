@@ -21,3 +21,5 @@
 - Select Box
 - Click to Copy
 - Flash Messages
+
+## The Emoji Picker
