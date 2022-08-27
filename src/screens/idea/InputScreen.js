@@ -47,17 +47,14 @@ export const IdeaInputScreen = () => {
   const [image, setImage] = useState(null);
   const [selectedEmoji, setSelectedEmoji] = useState("🚀");
   const [ideaTitle, setIdeaTitle] = useState("");
-  const [keyboardStatus, setKeyboardStatus] = useState(undefined);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
 
   useEffect(() => {
     const showSubscription = Keyboard.addListener("keyboardDidShow", (e) => {
       setKeyboardHeight(e.endCoordinates.height - 50);
-      setKeyboardStatus("shown");
     });
     const hideSubscription = Keyboard.addListener("keyboardDidHide", (e) => {
       setKeyboardHeight(0);
-      setKeyboardStatus("hidden");
     });
 
     return () => {
@@ -118,7 +115,7 @@ export const IdeaInputScreen = () => {
         autoFocus
         multiline={true}
         selectionColor={theme.colors.typography.pageTitle}
-        placeholder={keyboardStatus}
+        placeholder="Your Awesome Idea"
         textAlign="center"
         value={ideaTitle}
         onChangeText={setIdeaTitle}
