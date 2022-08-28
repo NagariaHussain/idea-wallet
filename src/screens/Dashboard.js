@@ -38,7 +38,7 @@ export const Dashboard = ({ route }) => {
       console.log("Reloading data");
       reloadIdeaData();
     }
-  }, [route.params?.reloadData]);
+  }, [route]);
 
   return (
     <PageFrame>
