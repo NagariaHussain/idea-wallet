@@ -12,6 +12,25 @@ import Animated, {
 } from "react-native-reanimated";
 import { launchCameraAndGetImage } from "../../lib/camera";
 import { EmojiPicker } from "../../components/utils/emojiPicker";
+import { CategorySelectMenu } from "../../components/idea/CategorySelect";
+
+const categories = [
+  {
+    title: "Fun",
+    emoji: "😆",
+    id: 483,
+  },
+  {
+    title: "College",
+    emoji: "📖",
+    id: 467,
+  },
+  {
+    title: "Business",
+    emoji: "🍿",
+    id: 764,
+  },
+];
 
 const FAB = styled(circularPrimaryButton)``;
 
@@ -58,12 +77,16 @@ export const IdeaInputScreen = () => {
       bottom: FABBottomPosition.value,
       position: "absolute",
       right: 0,
+      left: 0,
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
     };
   });
 
   useEffect(() => {
     const showSubscription = Keyboard.addListener("keyboardDidShow", (e) => {
-      FABBottomPosition.value = withTiming(e.endCoordinates.height - 30);
+      FABBottomPosition.value = withTiming(e.endCoordinates.height);
     });
     const hideSubscription = Keyboard.addListener("keyboardDidHide", () => {
       FABBottomPosition.value = withSpring(20, {
@@ -141,6 +164,10 @@ export const IdeaInputScreen = () => {
       )} */}
 
       <Animated.View style={FABAnimatedStyles}>
+        <CategorySelectMenu
+          onChange={(data) => console.log(data)}
+          categories={categories}
+        />
         <FAB onPress={Keyboard.dismiss}>
           <Icons.CheckIcon />
         </FAB>

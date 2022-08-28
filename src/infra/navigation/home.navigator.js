@@ -62,11 +62,15 @@ const HomeTabNavigator = () => (
 
 export const HomeNavigator = () => (
   <Stack.Navigator>
-    <Stack.Screen name="IdeaInput" component={IdeaInputScreen} />
-    <Stack.Screen
-      name="HomeTabNavigator"
-      options={{ headerShown: false }}
-      component={HomeTabNavigator}
-    />
+    <Stack.Group>
+      <Stack.Screen
+        name="HomeTabNavigator"
+        options={{ headerShown: false }}
+        component={HomeTabNavigator}
+      />
+    </Stack.Group>
+    <Stack.Group screenOptions={{ presentation: "modal" }}>
+      <Stack.Screen name="IdeaInput" component={IdeaInputScreen} />
+    </Stack.Group>
   </Stack.Navigator>
 );

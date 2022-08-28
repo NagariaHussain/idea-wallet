@@ -50,6 +50,7 @@ export const CategorySelectMenu = (props) => {
       renderItem={renderMenuItem}
       data={props.categories}
       value={value}
+      style={{ minWidth: 180 }}
       placeholderStyle={styles.menuBoxText}
       selectedTextStyle={styles.menuBoxText}
       renderLeftIcon={() => <MenuItemEmoji>{value.emoji}</MenuItemEmoji>}
