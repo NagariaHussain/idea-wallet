@@ -67,7 +67,7 @@ const EmojiButton = styled.View`
 
 export const IdeaInputScreen = ({ navigation }) => {
   const theme = useTheme();
-  const [image, setImage] = useState(null);
+  const [images, setImages] = useState([]);
 
   // New Idea Data
   const [ideaTitle, setIdeaTitle] = useState("");
@@ -119,16 +119,21 @@ export const IdeaInputScreen = ({ navigation }) => {
     },
     {
       icon: Icons.CameraIcon,
-      badgeText: 1,
+      badgeText: images.length || "",
       onPress: async () => {
         const i = await launchCameraAndGetImage();
         console.log("Image picked: ", i);
-        i && setImage(i.uri);
+        i && setImages((previousImages) => [...previousImages, i]);
       },
     },
   ];
 
-  async function handleSaveNewIdea(title, emoji, category) {
+  async function handleSaveNewIdea(
+    title,
+    emoji,
+    category,
+    attachedImages = []
+  ) {
     if (!title) {
       console.log("title is required!");
       return;
@@ -138,6 +143,7 @@ export const IdeaInputScreen = ({ navigation }) => {
       title,
       emoji,
       category,
+      images: attachedImages,
     });
 
     Keyboard.dismiss();
@@ -200,7 +206,12 @@ export const IdeaInputScreen = ({ navigation }) => {
         />
         <SaveIdeaButton
           onPress={() =>
-            handleSaveNewIdea(ideaTitle, selectedEmoji, selectedCategory)
+            handleSaveNewIdea(
+              ideaTitle,
+              selectedEmoji,
+              selectedCategory,
+              images
+            )
           }
         >
           <Icons.CheckIcon />
