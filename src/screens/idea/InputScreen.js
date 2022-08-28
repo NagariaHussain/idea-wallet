@@ -125,6 +125,9 @@ export const IdeaInputScreen = () => {
 
   return (
     <PageFrame>
+      {/* TODO: Replace with spacer */}
+      <View style={{ marginTop: 8 }}></View>
+
       <ButtonRow>
         <EmojiPicker
           onPick={(emoji, idx) => {
@@ -146,13 +149,14 @@ export const IdeaInputScreen = () => {
         })}
       </ButtonRow>
 
+      {/* TODO: Replace with spacer */}
       <View style={{ marginTop: 100 }}></View>
 
       <IdeaInputBox
         autoFocus
         multiline={true}
         selectionColor={theme.colors.typography.pageTitle}
-        placeholder="Your Awesome Idea"
+        placeholder=""
         textAlign="center"
         value={ideaTitle}
         onChangeText={setIdeaTitle}

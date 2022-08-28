@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -9,8 +9,9 @@ import { IdeaNavigator } from "./idea.navigator";
 import { BottomNavigationBar } from "../../components/BottomNavigationBar";
 import { HomeIcon } from "../../components/icons/HomeIcon";
 import { SettingsIcon } from "../../components/icons/SettingsIcon";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -37,40 +38,66 @@ function getTabIconComponent(isFocused, routeName) {
   );
 }
 
-const HomeTabNavigator = () => (
-  <Tab.Navigator tabBar={(props) => <BottomNavigationBar {...props} />}>
-    <Tab.Screen
-      name="IdeaNavigator"
-      options={{
-        headerShown: false,
-        title: "Home",
-        tabBarIcon: getTabIconComponent,
-      }}
-      component={IdeaNavigator}
-    />
-    <Tab.Screen
-      name="Settings"
-      options={{
-        headerShown: false,
-        title: "Settings",
-        tabBarIcon: getTabIconComponent,
-      }}
-      component={SettingsScreen}
-    />
-  </Tab.Navigator>
-);
+const HomeTabNavigator = () => {
+  const navigation = useNavigation();
 
-export const HomeNavigator = () => (
-  <Stack.Navigator>
-    <Stack.Group>
-      <Stack.Screen
-        name="HomeTabNavigator"
-        options={{ headerShown: false }}
-        component={HomeTabNavigator}
+  useEffect(() => {
+    navigation.navigate("IdeaInput");
+  }, []);
+
+  return (
+    <Tab.Navigator tabBar={(props) => <BottomNavigationBar {...props} />}>
+      <Tab.Screen
+        name="IdeaNavigator"
+        options={{
+          headerShown: false,
+          title: "Home",
+          tabBarIcon: getTabIconComponent,
+        }}
+        component={IdeaNavigator}
       />
-    </Stack.Group>
-    <Stack.Group screenOptions={{ presentation: "modal" }}>
-      <Stack.Screen name="IdeaInput" component={IdeaInputScreen} />
-    </Stack.Group>
-  </Stack.Navigator>
-);
+      <Tab.Screen
+        name="Settings"
+        options={{
+          headerShown: false,
+          title: "Settings",
+          tabBarIcon: getTabIconComponent,
+        }}
+        component={SettingsScreen}
+      />
+    </Tab.Navigator>
+  );
+};
+
+export const HomeNavigator = () => {
+  const theme = useTheme();
+
+  return (
+    <Stack.Navigator>
+      <Stack.Group>
+        <Stack.Screen
+          name="HomeTabNavigator"
+          options={{ headerShown: false }}
+          component={HomeTabNavigator}
+        />
+      </Stack.Group>
+
+      <Stack.Group screenOptions={{ presentation: "modal" }}>
+        <Stack.Screen
+          name="IdeaInput"
+          component={IdeaInputScreen}
+          options={{
+            title: "Your Awesome Idea",
+            headerTintColor: theme.colors.typography.pageTitle,
+            headerTitleStyle: {
+              fontFamily: theme.fonts.pageTitle,
+              fontWeight: theme.fontWeights.bold,
+              fontSize: theme.fontSizes.sm,
+            },
+            headerBackVisible: true,
+          }}
+        />
+      </Stack.Group>
+    </Stack.Navigator>
+  );
+};
