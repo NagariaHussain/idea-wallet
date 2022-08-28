@@ -1,5 +1,5 @@
-import { useFocusEffect } from "@react-navigation/native";
 import React, { useContext, useEffect } from "react";
+import { ScrollView } from "react-native";
 import styled from "styled-components";
 import { IdeaCategoryCard } from "../components/idea/CategoryCard";
 import { CategorySelectMenu } from "../components/idea/CategorySelect";
@@ -42,52 +42,54 @@ export const Dashboard = ({ route }) => {
 
   return (
     <PageFrame>
-      {!isLoading &&
-        ideaData.ideas &&
-        Object.keys(ideaData.ideas).map((ideaId) => {
-          let idea = ideaData.ideas[ideaId];
-          return <IdeaListItem key={ideaId} ideaData={idea} />;
-        })}
+      <ScrollView>
+        {!isLoading &&
+          ideaData.ideas &&
+          Object.keys(ideaData.ideas).map((ideaId) => {
+            let idea = ideaData.ideas[ideaId];
+            return <IdeaListItem key={ideaId} ideaData={idea} />;
+          })}
 
-      {/* Temp Spacer */}
-      <PageFrame />
-      <CenteredRow style={{ justifyContent: "space-between" }}>
-        <IdeaCategoryCard
-          categoryData={{
-            emoji: "🍿",
-            title: "Business",
-            noOfIdeas: 3,
-            id: 764,
-          }}
+        {/* Temp Spacer */}
+        <PageFrame />
+        <CenteredRow style={{ justifyContent: "space-between" }}>
+          <IdeaCategoryCard
+            categoryData={{
+              emoji: "🍿",
+              title: "Business",
+              noOfIdeas: 3,
+              id: 764,
+            }}
+          />
+          <IdeaCategoryCard
+            categoryData={{
+              emoji: "📖",
+              title: "College",
+              noOfIdeas: 8,
+              id: 467,
+            }}
+          />
+          <IdeaCategoryCard
+            categoryData={{
+              emoji: "😆",
+              title: "Fun",
+              noOfIdeas: 12,
+              id: 483,
+            }}
+          />
+        </CenteredRow>
+
+        <PageFrame />
+
+        <CategorySelectMenu
+          onChange={(data) => console.log(data)}
+          categories={categories}
         />
-        <IdeaCategoryCard
-          categoryData={{
-            emoji: "📖",
-            title: "College",
-            noOfIdeas: 8,
-            id: 467,
-          }}
-        />
-        <IdeaCategoryCard
-          categoryData={{
-            emoji: "😆",
-            title: "Fun",
-            noOfIdeas: 12,
-            id: 483,
-          }}
-        />
-      </CenteredRow>
 
-      <PageFrame />
+        <PageFrame />
 
-      <CategorySelectMenu
-        onChange={(data) => console.log(data)}
-        categories={categories}
-      />
-
-      <PageFrame />
-
-      <LinkAttachment linkData={{ link: "https://google.com" }} />
+        <LinkAttachment linkData={{ link: "https://google.com" }} />
+      </ScrollView>
     </PageFrame>
   );
 };
