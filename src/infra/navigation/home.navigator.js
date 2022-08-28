@@ -12,6 +12,7 @@ import { SettingsIcon } from "../../components/icons/SettingsIcon";
 import styled, { useTheme } from "styled-components";
 import { View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { IdeaContextProvider } from "../../provider/idea";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -42,7 +43,7 @@ const HomeTabNavigator = () => {
   const navigation = useNavigation();
 
   useEffect(() => {
-    navigation.navigate("IdeaInput");
+    navigation.push("IdeaInput");
   }, []);
 
   return (
@@ -73,31 +74,33 @@ export const HomeNavigator = () => {
   const theme = useTheme();
 
   return (
-    <Stack.Navigator>
-      <Stack.Group>
-        <Stack.Screen
-          name="HomeTabNavigator"
-          options={{ headerShown: false }}
-          component={HomeTabNavigator}
-        />
-      </Stack.Group>
+    <IdeaContextProvider>
+      <Stack.Navigator>
+        <Stack.Group>
+          <Stack.Screen
+            name="HomeTabNavigator"
+            options={{ headerShown: false }}
+            component={HomeTabNavigator}
+          />
+        </Stack.Group>
 
-      <Stack.Group screenOptions={{ presentation: "modal" }}>
-        <Stack.Screen
-          name="IdeaInput"
-          component={IdeaInputScreen}
-          options={{
-            title: "Your Awesome Idea",
-            headerTintColor: theme.colors.typography.pageTitle,
-            headerTitleStyle: {
-              fontFamily: theme.fonts.pageTitle,
-              fontWeight: theme.fontWeights.bold,
-              fontSize: theme.fontSizes.sm,
-            },
-            headerBackVisible: true,
-          }}
-        />
-      </Stack.Group>
-    </Stack.Navigator>
+        <Stack.Group screenOptions={{ presentation: "modal" }}>
+          <Stack.Screen
+            name="IdeaInput"
+            component={IdeaInputScreen}
+            options={{
+              title: "Your Awesome Idea",
+              headerTintColor: theme.colors.typography.pageTitle,
+              headerTitleStyle: {
+                fontFamily: theme.fonts.pageTitle,
+                fontWeight: theme.fontWeights.bold,
+                fontSize: theme.fontSizes.sm,
+              },
+              headerBackVisible: true,
+            }}
+          />
+        </Stack.Group>
+      </Stack.Navigator>
+    </IdeaContextProvider>
   );
 };

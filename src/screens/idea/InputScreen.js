@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled, { useTheme } from "styled-components";
 import { Icons } from "../../components/icons";
 import { CenteredRow } from "../../components/utils/Row";
@@ -13,6 +13,8 @@ import Animated, {
 import { launchCameraAndGetImage } from "../../lib/camera";
 import { EmojiPicker } from "../../components/utils/emojiPicker";
 import { CategorySelectMenu } from "../../components/idea/CategorySelect";
+import { createIdea } from "../../lib/storage";
+import { IdeaContext } from "../../provider/idea";
 
 const categories = [
   {
@@ -32,7 +34,7 @@ const categories = [
   },
 ];
 
-const FAB = styled(circularPrimaryButton)``;
+const SaveIdeaButton = styled(circularPrimaryButton)``;
 
 const ButtonRow = styled(CenteredRow)`
   justify-content: space-between;
@@ -63,12 +65,15 @@ const EmojiButton = styled.View`
   justify-content: center;
 `;
 
-export const IdeaInputScreen = () => {
+export const IdeaInputScreen = ({ navigation }) => {
   const theme = useTheme();
-
   const [image, setImage] = useState(null);
-  const [selectedEmoji, setSelectedEmoji] = useState("🚀");
+  const { reloadIdeaData } = useContext(IdeaContext);
+
+  // New Idea Data
   const [ideaTitle, setIdeaTitle] = useState("");
+  const [selectedEmoji, setSelectedEmoji] = useState("🚀");
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   // Animated Floating Action Button
   const FABBottomPosition = useSharedValue(20);
@@ -123,6 +128,22 @@ export const IdeaInputScreen = () => {
     },
   ];
 
+  async function handleSaveNewIdea(title, emoji, category) {
+    if (!title) {
+      console.log("title is required!");
+      return;
+    }
+
+    await createIdea({
+      title,
+      emoji,
+      category,
+    });
+
+    Keyboard.dismiss();
+    navigation.navigate("IdeaDashboard", { reloadData: true });
+  }
+
   return (
     <PageFrame>
       {/* TODO: Replace with spacer */}
@@ -169,12 +190,16 @@ export const IdeaInputScreen = () => {
 
       <Animated.View style={FABAnimatedStyles}>
         <CategorySelectMenu
-          onChange={(data) => console.log(data)}
+          onChange={(category) => setSelectedCategory(category.id)}
           categories={categories}
         />
-        <FAB onPress={Keyboard.dismiss}>
+        <SaveIdeaButton
+          onPress={() =>
+            handleSaveNewIdea(ideaTitle, selectedEmoji, selectedCategory)
+          }
+        >
           <Icons.CheckIcon />
-        </FAB>
+        </SaveIdeaButton>
       </Animated.View>
     </PageFrame>
   );
