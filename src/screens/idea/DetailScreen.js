@@ -19,11 +19,11 @@ const ImagesRow = styled(CenteredRow)`
 export const IdeaDetailScreen = ({ route }) => {
   const ideaId = route.params.ideaId;
   const { ideaData } = useContext(IdeaContext);
-  const imageAttachments = ideaData.ideas[ideaId]?.images || [];
+  const imageAttachments = ideaData.ideas[ideaId]?.images || []; // Also, handles the case when no image attachments
 
   return (
     <View style={styles.container}>
-      <Text>Images: {Object.keys(imageAttachments).length}</Text>
+      <Text>Images: {imageAttachments.length}</Text>
       <ImagesRow>
         {imageAttachments.map((image, idx) => {
           return <ImageAttachment key={idx} source={{ uri: image.uri }} />;
