@@ -33,9 +33,13 @@ export const createIdea = async (data) => {
 
   // Append this new one
   const newIdeaID = uuidv4();
-  parsedIdeaData.ideas[newIdeaID] = { id: newIdeaID, ...data };
+  parsedIdeaData.ideas[newIdeaID] = {
+    id: newIdeaID,
+    createdAt: new Date(),
+    ...data,
+  };
 
-  // Save the newly created ones to the storage
+  // Save the updated data to the storage
   try {
     await AsyncStorage.setItem("@ideaData", JSON.stringify(parsedIdeaData));
     console.log("New idea created");
@@ -44,6 +48,6 @@ export const createIdea = async (data) => {
     throw Error("Can't store data in phone storage");
   }
 
-  // TODO: Also attach creation time (createdAt)
   // TODO: Reload the idea in provider
+  // Ever better, set this directly!!
 };

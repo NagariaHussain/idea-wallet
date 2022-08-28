@@ -1,9 +1,11 @@
 import React from "react";
 import { Pressable, View } from "react-native";
-import { RightArrowIcon } from "../icons/RightArrow";
-import { Row, CenteredRow } from "../utils/Row";
 import styled from "styled-components";
+import { formatDistanceToNow } from "date-fns";
 import { useNavigation } from "@react-navigation/native";
+
+import { Row, CenteredRow } from "../utils/Row";
+import { RightArrowIcon } from "../icons/RightArrow";
 import { CardSubtitle, CardTitle, CardContainer } from "../utils/Card";
 
 const MAX_TITLE_SHOW_LENGTH = 14;
@@ -20,6 +22,30 @@ const ItemContainer = styled(CardContainer)`
 const Emoji = styled.Text`
   font-size: ${({ theme }) => theme.fontSizes.md};
 `;
+
+const getFormatedDateDistanceText = (date) => {
+  if (!date) {
+    return "";
+  }
+
+  console.log(date);
+  try {
+    const parsedCreatedAt = new Date(date);
+    const formatedDistance = formatDistanceToNow(parsedCreatedAt, {
+      addSuffix: true,
+    });
+
+    // To make it short
+    if (formatedDistance === "less than a minute ago") {
+      return "just now";
+    }
+
+    return formatedDistance;
+  } catch (e) {
+    console.log(e);
+    return "";
+  }
+};
 
 export const IdeaListItem = ({ ideaData }) => {
   const navigation = useNavigation();
@@ -40,7 +66,7 @@ export const IdeaListItem = ({ ideaData }) => {
         </Row>
 
         <CenteredRow>
-          <CardSubtitle createdAt={createdAt}>a minute ago</CardSubtitle>
+          <CardSubtitle>{getFormatedDateDistanceText(createdAt)}</CardSubtitle>
           <View style={{ marginLeft: 14 }}></View>
           <RightArrowIcon />
         </CenteredRow>

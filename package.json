@@ -18,6 +18,7 @@
     "@react-navigation/native-stack": "^6.7.0",
     "@shopify/flash-list": "1.1.0",
     "@supabase/supabase-js": "^1.35.6",
+    "date-fns": "^2.29.2",
     "expo": "~46.0.8",
     "expo-av": "~12.0.4",
     "expo-clipboard": "~3.1.0",
