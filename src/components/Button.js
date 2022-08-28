@@ -74,6 +74,7 @@ export const CircularButton = styled(Pressable)`
   border-radius: 100%;
   background-color: white;
   justify-content: center;
+  position: relative;
 `;
 
 export const circularPrimaryButton = styled(CircularButton)`
