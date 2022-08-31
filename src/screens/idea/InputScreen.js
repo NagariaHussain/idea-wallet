@@ -152,7 +152,9 @@ export const IdeaInputScreen = ({ navigation }) => {
       emoji,
       category,
       images: attachedImages,
-      voiceNote: { uri: attachedSoundRecording.getURI() },
+      voiceNote: attachedSoundRecording
+        ? { uri: attachedSoundRecording.getURI() }
+        : null,
     });
 
     Keyboard.dismiss();
