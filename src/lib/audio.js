@@ -30,3 +30,13 @@ export const stopAndGetRecording = async (recording) => {
   console.log("Recording stopped and stored at", uri);
   return recording;
 };
+
+export const playRecording = async (recording) => {
+  const soundObj = await recording.createNewLoadedSoundAsync();
+
+  if (soundObj.status.isLoaded) {
+    console.log("Sound is loaded");
+  }
+  // Play the loaded sound
+  await soundObj.sound.playAsync();
+};

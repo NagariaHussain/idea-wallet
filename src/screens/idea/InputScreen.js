@@ -15,6 +15,7 @@ import { EmojiPicker } from "../../components/utils/emojiPicker";
 import { CategorySelectMenu } from "../../components/idea/CategorySelect";
 import { createIdea } from "../../lib/storage";
 import { CircularBadge } from "../../components/Badge";
+import { playRecording, startAndGetRecording, stopAndGetRecording } from "../../lib/audio";
 
 const categories = [
   {
@@ -67,7 +68,11 @@ const EmojiButton = styled.View`
 
 export const IdeaInputScreen = ({ navigation }) => {
   const theme = useTheme();
+
+  // Attachments
   const [images, setImages] = useState([]);
+  const [recordingInProgress, setRecordingInProgress] = useState(false);
+  const [soundRecording, setSoundRecording] = useState(null);
 
   // New Idea Data
   const [ideaTitle, setIdeaTitle] = useState("");
@@ -111,7 +116,18 @@ export const IdeaInputScreen = ({ navigation }) => {
     },
     {
       icon: Icons.MicIcon,
-      onPress: () => Keyboard.dismiss(),
+      onPress: async () => {
+        if (!recordingInProgress) {
+          setRecordingInProgress(true);
+          const recording = await startAndGetRecording();
+          setSoundRecording(recording);
+        } else {
+          const recordedSound = await stopAndGetRecording(soundRecording);
+          setSoundRecording(null);
+          setRecordingInProgress(false);
+          await playRecording(recordedSound);
+        }
+      },
     },
     {
       icon: Icons.PencilIcon,
