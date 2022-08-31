@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import ImageView from "react-native-image-viewing";
 
 import { CenteredRow } from "../../components/utils/Row";
+import { TouchableOpacity } from "react-native";
 
 const ImageAttachment = styled.Image`
   width: 100px;
@@ -14,11 +16,33 @@ const ImagesRow = styled(CenteredRow)`
   margin-top: 20px;
 `;
 export const ImageAttachmentRow = ({ images, ideaId }) => {
+  const [isImageViewerVisible, setIsImageViewerVisible] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
   return (
-    <ImagesRow>
-      {images.map((image, idx) => {
-        return <ImageAttachment key={idx} source={{ uri: image.uri }} />;
-      })}
-    </ImagesRow>
+    <>
+      <ImagesRow>
+        {images.map((image, idx) => {
+          return (
+            <TouchableOpacity
+              key={idx}
+              onPress={() => {
+                setCurrentImageIndex(idx);
+                setIsImageViewerVisible(true);
+              }}
+            >
+              <ImageAttachment source={{ uri: image.uri }} />
+            </TouchableOpacity>
+          );
+        })}
+      </ImagesRow>
+
+      <ImageView
+        visible={isImageViewerVisible}
+        images={images}
+        imageIndex={currentImageIndex}
+        onRequestClose={() => setIsImageViewerVisible(false)}
+      />
+    </>
   );
 };
