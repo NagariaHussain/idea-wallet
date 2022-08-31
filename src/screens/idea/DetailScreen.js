@@ -1,12 +1,11 @@
 import React from "react";
-import { View, Text, StyleSheet, Alert } from "react-native";
 import { useContext } from "react";
+import styled from "styled-components";
+import { View, Text, StyleSheet } from "react-native";
+
 import { IdeaContext } from "../../provider/idea";
 import { CenteredRow } from "../../components/utils/Row";
-import styled from "styled-components";
-import { Button } from "../../components/Button";
-import { deleteIdea } from "../../lib/storage";
-import { useNavigation } from "@react-navigation/native";
+import { DeleteIdeaButton } from "../../components/idea/DeleteIdeaButton";
 
 const ImageAttachment = styled.Image`
   width: 100px;
@@ -18,41 +17,6 @@ const ImageAttachment = styled.Image`
 const ImagesRow = styled(CenteredRow)`
   margin-top: 20px;
 `;
-
-const DeleteIdeaButton = ({ ideaId, ideaData }) => {
-  const navigation = useNavigation();
-
-  // Confirm deletion
-  const showDeletionAlert = () => {
-    Alert.alert(
-      "Delete Idea",
-      "This idea will be gone 😔. Are you sure?",
-      [
-        {
-          text: "Cancel",
-          style: "cancel",
-        },
-        {
-          text: "Delete",
-          style: "destructive",
-          onPress: async () => {
-            await deleteIdea(ideaId, ideaData);
-            navigation.navigate("IdeaDashboard", { reloadData: true });
-          },
-        },
-      ],
-      {
-        cancelable: true,
-      }
-    );
-  };
-
-  return (
-    <Button type="danger" onPress={showDeletionAlert}>
-      Delete
-    </Button>
-  );
-};
 
 export const IdeaDetailScreen = ({ route }) => {
   const ideaId = route.params.ideaId;
@@ -67,7 +31,7 @@ export const IdeaDetailScreen = ({ route }) => {
           return <ImageAttachment key={idx} source={{ uri: image.uri }} />;
         })}
       </ImagesRow>
-      <DeleteIdeaButton ideaId={ideaId} ideaData={ideaData} />
+      <DeleteIdeaButton ideaId={ideaId} />
     </View>
   );
 };
