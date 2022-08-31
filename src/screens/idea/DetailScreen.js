@@ -1,22 +1,10 @@
 import React from "react";
 import { useContext } from "react";
-import styled from "styled-components";
 import { View, Text, StyleSheet } from "react-native";
 
 import { IdeaContext } from "../../provider/idea";
-import { CenteredRow } from "../../components/utils/Row";
 import { DeleteIdeaButton } from "../../components/idea/DeleteIdeaButton";
-
-const ImageAttachment = styled.Image`
-  width: 100px;
-  height: 100px;
-  border-radius: ${({ theme }) => theme.sizes.borderRadius.md};
-  border: 2px solid ${({ theme }) => theme.colors.stroke.main};
-`;
-
-const ImagesRow = styled(CenteredRow)`
-  margin-top: 20px;
-`;
+import { ImageAttachmentRow } from "./ImageAttachmentRow";
 
 export const IdeaDetailScreen = ({ route }) => {
   const ideaId = route.params.ideaId;
@@ -26,11 +14,7 @@ export const IdeaDetailScreen = ({ route }) => {
   return (
     <View style={styles.container}>
       <Text>Images: {imageAttachments.length}</Text>
-      <ImagesRow>
-        {imageAttachments.map((image, idx) => {
-          return <ImageAttachment key={idx} source={{ uri: image.uri }} />;
-        })}
-      </ImagesRow>
+      <ImageAttachmentRow images={imageAttachments} />
       <DeleteIdeaButton ideaId={ideaId} />
     </View>
   );
