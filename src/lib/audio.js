@@ -12,10 +12,11 @@ export const startAndGetRecording = async () => {
       playsInSilentModeIOS: true,
     });
 
-    console.log("Starting recording..");
     const { recording } = await Audio.Recording.createAsync(
       Audio.RecordingOptionsPresets.HIGH_QUALITY
     );
+
+    console.debug("Recording Started.");
 
     return recording;
   } catch (e) {

@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styled, { useTheme } from "styled-components";
 import { Icons } from "../../components/icons";
 import { CenteredRow } from "../../components/utils/Row";
 import { CircularButton, circularPrimaryButton } from "../../components/Button";
 import { TextInput, View, Keyboard } from "react-native";
+import Lottie from "lottie-react-native";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -15,7 +16,11 @@ import { EmojiPicker } from "../../components/utils/emojiPicker";
 import { CategorySelectMenu } from "../../components/idea/CategorySelect";
 import { createIdea } from "../../lib/storage";
 import { CircularBadge } from "../../components/Badge";
-import { playRecording, startAndGetRecording, stopAndGetRecording } from "../../lib/audio";
+import {
+  playRecording,
+  startAndGetRecording,
+  stopAndGetRecording,
+} from "../../lib/audio";
 
 const categories = [
   {
@@ -71,6 +76,7 @@ export const IdeaInputScreen = ({ navigation }) => {
 
   // Attachments
   const [images, setImages] = useState([]);
+  const recordingAnimation = useRef(null);
   const [recordingInProgress, setRecordingInProgress] = useState(false);
   const [soundRecording, setSoundRecording] = useState(null);
 
@@ -113,21 +119,6 @@ export const IdeaInputScreen = ({ navigation }) => {
     {
       icon: Icons.LinkIcon,
       onPress: () => console.log("link pressed."),
-    },
-    {
-      icon: Icons.MicIcon,
-      onPress: async () => {
-        if (!recordingInProgress) {
-          setRecordingInProgress(true);
-          const recording = await startAndGetRecording();
-          setSoundRecording(recording);
-        } else {
-          const recordedSound = await stopAndGetRecording(soundRecording);
-          setSoundRecording(null);
-          setRecordingInProgress(false);
-          await playRecording(recordedSound);
-        }
-      },
     },
     {
       icon: Icons.PencilIcon,
@@ -195,6 +186,36 @@ export const IdeaInputScreen = ({ navigation }) => {
             </View>
           );
         })}
+
+        <CircularButton
+          onPress={async () => {
+            if (!recordingInProgress) {
+              setRecordingInProgress(true);
+              const recording = await startAndGetRecording();
+              recordingAnimation.current?.play();
+              setSoundRecording(recording);
+            } else {
+              const recordedSound = await stopAndGetRecording(soundRecording);
+              setSoundRecording(null);
+              setRecordingInProgress(false);
+              // Play the recorded sound
+              // TODO: Refactor to a separate control
+              await playRecording(recordedSound);
+            }
+          }}
+        >
+          {recordingInProgress ? (
+            <Lottie
+              autoPlay
+              ref={recordingAnimation}
+              loop
+              style={{ width: 25, height: 25 }}
+              source={require("../../../assets/icons/animated/sound-recording.json")}
+            />
+          ) : (
+            <Icons.MicIcon />
+          )}
+        </CircularButton>
       </ButtonRow>
 
       {/* TODO: Replace with spacer */}
