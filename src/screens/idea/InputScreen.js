@@ -139,7 +139,8 @@ export const IdeaInputScreen = ({ navigation }) => {
     title,
     emoji,
     category,
-    attachedImages = []
+    attachedImages = [],
+    attachedSoundRecording = {}
   ) {
     if (!title) {
       console.log("title is required!");
@@ -151,6 +152,7 @@ export const IdeaInputScreen = ({ navigation }) => {
       emoji,
       category,
       images: attachedImages,
+      voiceNote: { uri: attachedSoundRecording.getURI() },
     });
 
     Keyboard.dismiss();
@@ -196,7 +198,6 @@ export const IdeaInputScreen = ({ navigation }) => {
               setSoundRecording(recording);
             } else {
               const recordedSound = await stopAndGetRecording(soundRecording);
-              setSoundRecording(null);
               setRecordingInProgress(false);
               // Play the recorded sound
               // TODO: Refactor to a separate control
@@ -247,7 +248,8 @@ export const IdeaInputScreen = ({ navigation }) => {
               ideaTitle,
               selectedEmoji,
               selectedCategory,
-              images
+              images,
+              soundRecording
             )
           }
         >
