@@ -1,6 +1,6 @@
 import React from "react";
 import { CopyIcon } from "../icons/CopyIcon";
-import { Pressable } from "react-native";
+import { TouchableOpacity } from "react-native";
 import styled from "styled-components";
 import { CardContainer } from "./Card";
 import * as Clipboard from "expo-clipboard";
@@ -17,13 +17,13 @@ async function copyToClipboard(textContent) {
 
 export const CopyToClipboardButton = ({ textContent }) => {
   return (
-    <Pressable
+    <TouchableOpacity
       accessibilityRole="button"
       onPress={() => copyToClipboard(textContent)}
     >
       <ClickToCopyButtonContainer>
         <CopyIcon />
       </ClickToCopyButtonContainer>
-    </Pressable>
+    </TouchableOpacity>
   );
 };
