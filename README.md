@@ -21,6 +21,9 @@
 - Select Box
 - Click to Copy
 - Flash Messages
+- Image Viewer
+
+<https://github.com/jobtoday/react-native-image-viewing>
 
 ## The Emoji Picker
 
@@ -29,3 +32,5 @@
 - Performant List using Flash list
 
 FAB Button based on: <https://snack.expo.dev/@andypandy/animated-button-above-keyboard?platform=ios>
+
+## The sound player

@@ -8,7 +8,7 @@ import { Row, CenteredRow } from "../utils/Row";
 import { RightArrowIcon } from "../icons/RightArrow";
 import { CardSubtitle, CardTitle, CardContainer } from "../utils/Card";
 
-const MAX_TITLE_SHOW_LENGTH = 14;
+const MAX_TITLE_SHOW_LENGTH = 10;
 
 const ItemContainer = styled(CardContainer)`
   width: 100%;

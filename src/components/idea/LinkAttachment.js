@@ -1,5 +1,5 @@
 import React from "react";
-import { Pressable, Text, View } from "react-native";
+import { Pressable, View } from "react-native";
 import styled from "styled-components";
 import { CardContainer } from "../utils/Card";
 import { CopyToClipboardButton } from "../utils/CopyToClipboardButton";

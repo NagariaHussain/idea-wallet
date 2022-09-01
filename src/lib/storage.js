@@ -50,9 +50,6 @@ export const createIdea = async (data) => {
 
   // Save the updated data to the storage
   await saveIdeaDataToStorage(parsedIdeaData);
-
-  // TODO: Reload the idea in provider
-  // Ever better, set this directly!!
 };
 
 export const deleteIdea = async (ideaId, ideaData) => {

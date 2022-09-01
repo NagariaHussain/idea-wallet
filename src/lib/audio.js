@@ -41,3 +41,8 @@ export const playRecording = async (recording) => {
   // Play the loaded sound
   await soundObj.sound.playAsync();
 };
+
+export const playSoundFromUri = async (uri) => {
+  const { sound: playbackObject } = await Audio.Sound.createAsync({ uri });
+  return playbackObject;
+};
