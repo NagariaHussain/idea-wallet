@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 
-import { TouchableOpacity, View } from "react-native";
+import { TouchableOpacity } from "react-native";
 import styled from "styled-components";
 import { CardContainer } from "../utils/Card";
 import { Icons } from "../icons";
 import { playSoundFromUri } from "../../lib/audio";
+import { ProgressBar } from "../utils/ProgressBar";
 
 const PlayerControlContainer = styled(CardContainer)`
   padding: 14px;
@@ -18,34 +19,6 @@ const PlayerContainer = styled(CardContainer)`
   justify-content: space-between;
   width: 100%;
   padding: 7px 14px 7px 11px;
-`;
-
-const ProgressBar = styled(View)`
-  height: 0;
-  display: flex;
-  flex: 1;
-  margin: 0px 18px;
-  border: 1.5px solid ${({ theme }) => theme.colors.icon.dark};
-`;
-
-const ProgressInternalBar = styled.View`
-  position: absolute;
-  left: 0;
-  top: -1.5px;
-  width: 0%;
-  z-index: 99;
-  height: 0;
-  border: 1.5px solid ${({ theme }) => theme.colors.primary.main};
-`;
-
-const ProgressIndicatorCircle = styled(View)`
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  left: -4px;
-  top: -4px;
-  background-color: ${({ theme }) => theme.colors.primary.main};
-  border-radius: 100%;
 `;
 
 export const VoiceNotePlayer = ({ soundUri }) => {
@@ -64,7 +37,7 @@ export const VoiceNotePlayer = ({ soundUri }) => {
 
         if (status.isPlaying) {
           const progress = status.positionMillis / status.durationMillis;
-          setPlayProgress(progress * 100);
+          setPlayProgress(progress);
         }
       });
       setSound(soundObject);
@@ -88,14 +61,9 @@ export const VoiceNotePlayer = ({ soundUri }) => {
           {isPlaying ? <Icons.PauseIcon /> : <Icons.PlayIcon />}
         </PlayerControlContainer>
       </TouchableOpacity>
-      <ProgressBar>
-        <ProgressIndicatorCircle
-          style={{
-            left: playProgress > 0 ? `${playProgress}%` : -4,
-          }}
-        />
-        <ProgressInternalBar style={{ width: `${playProgress}%` }} />
-      </ProgressBar>
+
+      <ProgressBar progressFraction={playProgress} />
+
       <Icons.TrashCanIcon />
     </PlayerContainer>
   );
