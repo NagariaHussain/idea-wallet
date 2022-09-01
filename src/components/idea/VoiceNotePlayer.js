@@ -21,11 +21,21 @@ const PlayerContainer = styled(CardContainer)`
 `;
 
 const ProgressBar = styled(View)`
-  height: 1.5px;
+  height: 0;
   display: flex;
   flex: 1;
   margin: 0px 18px;
   border: 1.5px solid ${({ theme }) => theme.colors.icon.dark};
+`;
+
+const ProgressInternalBar = styled.View`
+  position: absolute;
+  left: 0;
+  top: -1.5px;
+  width: 0%;
+  z-index: 99;
+  height: 0;
+  border: 1.5px solid ${({ theme }) => theme.colors.primary.main};
 `;
 
 const ProgressIndicatorCircle = styled(View)`
@@ -84,6 +94,7 @@ export const VoiceNotePlayer = ({ soundUri }) => {
             left: playProgress > 0 ? `${playProgress}%` : -4,
           }}
         />
+        <ProgressInternalBar style={{ width: `${playProgress}%` }} />
       </ProgressBar>
       <Icons.TrashCanIcon />
     </PlayerContainer>
