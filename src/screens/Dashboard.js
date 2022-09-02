@@ -1,13 +1,14 @@
-import React, { useContext, useEffect } from "react";
 import { ScrollView } from "react-native";
 import styled from "styled-components";
-import { IdeaCategoryCard } from "../components/idea/CategoryCard";
-import { CategorySelectMenu } from "../components/idea/CategorySelect";
-import { LinkAttachment } from "../components/idea/LinkAttachment";
-import { IdeaListItem } from "../components/idea/ListItem";
-import { CenteredRow } from "../components/utils/Row";
-import { IdeaContext } from "../provider/idea";
+import React, { useContext, useEffect } from "react";
 import { compareDesc as compareDatesDesc } from "date-fns";
+
+import { IdeaContext } from "../provider/idea";
+import { CenteredRow } from "../components/utils/Row";
+import { IdeaListItem } from "../components/idea/ListItem";
+import { IdeaCategoryCard } from "../components/idea/CategoryCard";
+import { LinkAttachment } from "../components/idea/LinkAttachment";
+import { CategorySelectMenu } from "../components/idea/CategorySelect";
 import { getProcessedCategoriesList } from "../components/idea/CategorySelect";
 
 const PageFrame = styled.View`
