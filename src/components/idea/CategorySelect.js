@@ -23,7 +23,8 @@ export const getProcessedCategoriesList = (ideaData) => {
       continue;
     }
 
-    ideaData.categories[ideaCategory].ideas.push(ideaId);
+    const categoryIdeasList = ideaData.categories[ideaCategory].ideas;
+    categoryIdeasList.push(ideaId);
   }
 
   const categoriesList = [];
