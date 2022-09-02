@@ -13,9 +13,7 @@ async function saveIdeaDataToStorage(data) {
   }
 }
 
-export const createIdea = async (data) => {
-  console.debug("creating new idea");
-
+async function loadCurrentIdeaData() {
   let parsedIdeaData = ideaDataFixture; // To make more robust
 
   // Load the old ideas
@@ -24,24 +22,32 @@ export const createIdea = async (data) => {
     if (ideaData !== null) {
       try {
         parsedIdeaData = JSON.parse(ideaData);
+        return parsedIdeaData;
       } catch (e) {
         console.log("Error Parsing ideaData: ", ideaData);
+        throw e;
       }
     }
   } catch (e) {
     console.error("Error Fetching ideaData from local storage: ", e);
+    throw e;
   }
+}
+
+export const createIdea = async (data) => {
+  console.debug("creating new idea");
+  const currentIdeaData = await loadCurrentIdeaData();
 
   // Append this new one
   const newIdeaID = uuidv4();
-  parsedIdeaData.ideas[newIdeaID] = {
+  currentIdeaData.ideas[newIdeaID] = {
     id: newIdeaID,
     createdAt: new Date(),
     ...data,
   };
 
   // Save the updated data to the storage
-  await saveIdeaDataToStorage(parsedIdeaData);
+  await saveIdeaDataToStorage(currentIdeaData);
 };
 
 export const deleteIdea = async (ideaId, ideaData) => {
@@ -52,4 +58,19 @@ export const deleteIdea = async (ideaId, ideaData) => {
   // TODO: Delete the attachments too.
   // Save the data back to storage
   await saveIdeaDataToStorage(ideaData);
+};
+
+export const createCategory = async (data) => {
+  const currentIdeaData = await loadCurrentIdeaData();
+
+  // Append this new one
+  const newCategoryId = uuidv4();
+  currentIdeaData.categories[newCategoryId] = {
+    id: newCategoryId,
+    createdAt: new Date(),
+    ...data,
+  };
+
+  // Save the updated data to the storage
+  await saveIdeaDataToStorage(currentIdeaData);
 };
