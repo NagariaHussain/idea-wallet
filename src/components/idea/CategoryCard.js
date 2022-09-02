@@ -27,7 +27,7 @@ export const IdeaCategoryCard = ({ categoryData }) => {
       <CategoryCardContainer>
         <View>
           <CardSubtitle>
-            {noOfIdeas} {noOfIdeas > 1 ? "Ideas" : "Idea"}
+            {noOfIdeas} {noOfIdeas === 1 ? "Idea" : "Ideas"}
           </CardSubtitle>
           <View style={{ marginTop: 10 }}></View>
           <CardTitle>{title}</CardTitle>
