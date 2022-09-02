@@ -11,7 +11,6 @@ import { CardSubtitle, CardTitle, CardContainer } from "../utils/Card";
 const MAX_TITLE_SHOW_LENGTH = 10;
 
 const ItemContainer = styled(CardContainer)`
-  width: 100%;
   padding: 18px 14px;
   display: flex;
   flex-direction: row;
