@@ -22,24 +22,6 @@ import {
   stopAndGetRecording,
 } from "../../lib/audio";
 
-const categories = [
-  {
-    title: "Fun",
-    emoji: "😆",
-    id: 483,
-  },
-  {
-    title: "College",
-    emoji: "📖",
-    id: 467,
-  },
-  {
-    title: "Business",
-    emoji: "🍿",
-    id: 764,
-  },
-];
-
 const SaveIdeaButton = styled(circularPrimaryButton)``;
 
 const ButtonRow = styled(CenteredRow)`
@@ -242,7 +224,6 @@ export const IdeaInputScreen = ({ navigation }) => {
       <Animated.View style={FABAnimatedStyles}>
         <CategorySelectMenu
           onChange={(category) => setSelectedCategory(category.id)}
-          categories={categories}
         />
         <SaveIdeaButton
           onPress={() =>

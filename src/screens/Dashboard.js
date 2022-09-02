@@ -8,24 +8,7 @@ import { IdeaListItem } from "../components/idea/ListItem";
 import { CenteredRow } from "../components/utils/Row";
 import { IdeaContext } from "../provider/idea";
 import { compareDesc as compareDatesDesc } from "date-fns";
-
-const categories = [
-  {
-    title: "Fun",
-    emoji: "😆",
-    id: 483,
-  },
-  {
-    title: "College",
-    emoji: "📖",
-    id: 467,
-  },
-  {
-    title: "Business",
-    emoji: "🍿",
-    id: 764,
-  },
-];
+import { getProcessedCategoriesList } from "../components/idea/CategorySelect";
 
 const PageFrame = styled.View`
   margin: 10px 24px;
@@ -47,6 +30,7 @@ const getRecentIdeas = (ideasObj, numOfIdeas = 3) => {
 
 export const Dashboard = ({ route }) => {
   const { ideaData, isLoading, reloadIdeaData } = useContext(IdeaContext);
+  const categories = getProcessedCategoriesList(ideaData);
 
   useEffect(() => {
     if (route.params?.reloadData) {
@@ -67,38 +51,14 @@ export const Dashboard = ({ route }) => {
         {/* Temp Spacer */}
         <PageFrame />
         <CenteredRow style={{ justifyContent: "space-between" }}>
-          <IdeaCategoryCard
-            categoryData={{
-              emoji: "🍿",
-              title: "Business",
-              noOfIdeas: 3,
-              id: 764,
-            }}
-          />
-          <IdeaCategoryCard
-            categoryData={{
-              emoji: "📖",
-              title: "College",
-              noOfIdeas: 8,
-              id: 467,
-            }}
-          />
-          <IdeaCategoryCard
-            categoryData={{
-              emoji: "😆",
-              title: "Fun",
-              noOfIdeas: 12,
-              id: 483,
-            }}
-          />
+          {categories.map((category) => (
+            <IdeaCategoryCard key={category.id} categoryData={category} />
+          ))}
         </CenteredRow>
 
         <PageFrame />
 
-        <CategorySelectMenu
-          onChange={(data) => console.log(data)}
-          categories={categories}
-        />
+        <CategorySelectMenu onChange={(data) => console.log(data)} />
 
         <PageFrame />
 

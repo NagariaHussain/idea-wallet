@@ -2,6 +2,7 @@ import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import ideaDataFixture from "../fixtures/ideaData";
 
 async function saveIdeaDataToStorage(data) {
   try {
@@ -15,16 +16,7 @@ async function saveIdeaDataToStorage(data) {
 export const createIdea = async (data) => {
   console.debug("creating new idea");
 
-  let parsedIdeaData = {
-    ideas: {},
-    categories: {
-      1: {
-        id: 1,
-        title: "General",
-        emoji: "💡",
-      },
-    },
-  };
+  let parsedIdeaData = ideaDataFixture; // To make more robust
 
   // Load the old ideas
   try {

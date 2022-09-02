@@ -1,9 +1,40 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import styled from "styled-components/native";
 import { CenteredRow } from "../utils/Row";
 import { theme } from "../../infra/theme";
+import { IdeaContext } from "../../provider/idea";
+
+export const getProcessedCategoriesList = (ideaData) => {
+  if (!ideaData?.categories) {
+    return [];
+  }
+
+  for (let categoryId in ideaData.categories) {
+    ideaData.categories[categoryId].noOfIdeas = 0;
+  }
+  // Count the number of ideas in this category
+  for (let ideaId in ideaData.ideas) {
+    const ideaCategory = ideaData.ideas[ideaId].category;
+
+    if (!ideaCategory) {
+      continue;
+    }
+
+    ideaData.categories[ideaCategory].noOfIdeas =
+      ideaData.categories[ideaCategory]?.noOfIdeas + 1;
+  }
+
+  const categoriesList = [];
+
+  for (let categoryId in ideaData.categories) {
+    categoriesList.push(ideaData.categories[categoryId]);
+  }
+
+  console.log(categoriesList);
+  return categoriesList;
+};
 
 const MenuItemRow = styled(CenteredRow)`
   padding: 12px 10px 12px 18px;
@@ -37,7 +68,17 @@ const DropdownMenu = styled(Dropdown)`
 `;
 
 export const CategorySelectMenu = (props) => {
-  const [value, setValue] = useState(props?.categories[0]);
+  const { ideaData } = useContext(IdeaContext);
+  const categories = getProcessedCategoriesList(ideaData);
+
+  const [value, setValue] = useState(categories[0] || null);
+
+  useEffect(() => {
+    if (categories.length > 0 && !value) {
+      props.onChange(categories[0]);
+      setValue(categories[0]);
+    }
+  }, [ideaData]);
 
   return (
     <DropdownMenu
@@ -48,12 +89,12 @@ export const CategorySelectMenu = (props) => {
       labelField="title"
       valueField="id"
       renderItem={renderMenuItem}
-      data={props.categories}
+      data={categories}
       value={value}
       style={{ minWidth: 180 }}
       placeholderStyle={styles.menuBoxText}
       selectedTextStyle={styles.menuBoxText}
-      renderLeftIcon={() => <MenuItemEmoji>{value.emoji}</MenuItemEmoji>}
+      renderLeftIcon={() => <MenuItemEmoji>{value?.emoji}</MenuItemEmoji>}
     />
   );
 };

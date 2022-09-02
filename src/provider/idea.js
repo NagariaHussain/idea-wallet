@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import ideaDataFixture from "../fixtures/ideaData";
 
 export const IdeaContext = createContext();
 
@@ -21,10 +22,16 @@ export const IdeaContextProvider = ({ children }) => {
       const jsonValue = await AsyncStorage.getItem("@ideaData");
       if (jsonValue !== null) {
         setIdeaData(JSON.parse(jsonValue));
-        console.log("Idea Data Loaded.");
+        console.debug("Idea Data Loaded.");
         setIsLoading(false);
       } else {
-        console.log("ideaData has null value");
+        // Populate with fixture data
+        console.debug("ideaData has null value");
+        setIdeaData(ideaDataFixture);
+        await AsyncStorage.setItem(
+          "@ideaData",
+          JSON.stringify(ideaDataFixture)
+        );
         setIsLoading(false);
       }
     } catch (e) {
@@ -35,7 +42,7 @@ export const IdeaContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    retrieveIdeas();
+    reloadIdeaData();
   }, []);
 
   return (
