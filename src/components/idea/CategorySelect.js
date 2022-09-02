@@ -12,9 +12,10 @@ export const getProcessedCategoriesList = (ideaData) => {
   }
 
   for (let categoryId in ideaData.categories) {
-    ideaData.categories[categoryId].noOfIdeas = 0;
+    ideaData.categories[categoryId].ideas = [];
   }
-  // Count the number of ideas in this category
+
+  // Attach ideas
   for (let ideaId in ideaData.ideas) {
     const ideaCategory = ideaData.ideas[ideaId].category;
 
@@ -22,17 +23,18 @@ export const getProcessedCategoriesList = (ideaData) => {
       continue;
     }
 
-    ideaData.categories[ideaCategory].noOfIdeas =
-      ideaData.categories[ideaCategory]?.noOfIdeas + 1;
+    ideaData.categories[ideaCategory].ideas.push(ideaId);
   }
 
   const categoriesList = [];
-
   for (let categoryId in ideaData.categories) {
-    categoriesList.push(ideaData.categories[categoryId]);
+    const categoryObj = ideaData.categories[categoryId];
+    categoriesList.push({
+      ...categoryObj,
+      noOfIdeas: categoryObj.ideas.length,
+    });
   }
 
-  console.log(categoriesList);
   return categoriesList;
 };
 
@@ -71,14 +73,14 @@ export const CategorySelectMenu = (props) => {
   const { ideaData } = useContext(IdeaContext);
   const categories = getProcessedCategoriesList(ideaData);
 
-  const [value, setValue] = useState(categories[0] || null);
+  const [value, setValue] = useState(null);
 
   useEffect(() => {
     if (categories.length > 0 && !value) {
       props.onChange(categories[0]);
       setValue(categories[0]);
     }
-  }, [ideaData]);
+  }, [categories, value]);
 
   return (
     <DropdownMenu

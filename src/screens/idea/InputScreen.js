@@ -223,7 +223,9 @@ export const IdeaInputScreen = ({ navigation }) => {
 
       <Animated.View style={FABAnimatedStyles}>
         <CategorySelectMenu
-          onChange={(category) => setSelectedCategory(category.id)}
+          onChange={(category) => {
+            setSelectedCategory(category.id);
+          }}
         />
         <SaveIdeaButton
           onPress={() =>
