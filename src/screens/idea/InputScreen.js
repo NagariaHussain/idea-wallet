@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled, { useTheme } from "styled-components";
 import { Icons } from "../../components/icons";
 import { CenteredRow } from "../../components/utils/Row";
@@ -37,7 +37,7 @@ const IdeaInputBox = styled(TextInput)`
   max-height: 200px;
 `;
 
-export const IdeaInputScreen = ({ navigation }) => {
+export const IdeaInputScreen = ({ navigation, route }) => {
   const theme = useTheme();
 
   // Attachments
@@ -50,11 +50,34 @@ export const IdeaInputScreen = ({ navigation }) => {
   const [ideaTitle, setIdeaTitle] = useState("");
   const [selectedEmoji, setSelectedEmoji] = useState("🚀");
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [links, setLinks] = useState([]);
+
+  useEffect(() => {
+    // Remove deleted links
+    if (route.params?.deleted) {
+      const deletedLinkAttachments = route.params?.deleted;
+      setLinks((prevLinks) =>
+        prevLinks.filter((l) => !deletedLinkAttachments.includes(l))
+      );
+    }
+
+    // Add newly inserted link
+    if (route.params?.link) {
+      const link = route.params.link;
+
+      // Handle duplicate links
+      if (!links.includes(link)) {
+        setLinks((prevLinks) => [...prevLinks, link]);
+      }
+    }
+  }, [route.params?.link, route.params?.deleted]);
 
   const actions = [
     {
       icon: Icons.LinkIcon,
-      onPress: () => console.log("link pressed."),
+      badgeText: links.length || "",
+      onPress: () =>
+        navigation.push("LinkAttachment", { existingLinks: links }),
     },
     {
       icon: Icons.PencilIcon,
@@ -65,7 +88,6 @@ export const IdeaInputScreen = ({ navigation }) => {
       badgeText: images.length || "",
       onPress: async () => {
         const i = await launchCameraAndGetImage();
-        console.log("Image picked: ", i);
         i && setImages((previousImages) => [...previousImages, i]);
       },
     },
@@ -76,7 +98,8 @@ export const IdeaInputScreen = ({ navigation }) => {
     emoji,
     category,
     attachedImages = [],
-    attachedSoundRecording = {}
+    attachedSoundRecording = {},
+    links = []
   ) {
     if (!title) {
       console.log("title is required!");
@@ -91,6 +114,7 @@ export const IdeaInputScreen = ({ navigation }) => {
       voiceNote: attachedSoundRecording
         ? { uri: attachedSoundRecording.getURI() }
         : null,
+      links,
     });
 
     Keyboard.dismiss();
@@ -105,8 +129,7 @@ export const IdeaInputScreen = ({ navigation }) => {
       <ButtonRow>
         <EmojiPicker
           selectedEmoji={selectedEmoji}
-          onPick={(emoji, idx) => {
-            console.log("Emoji Picked: ", emoji);
+          onPick={(emoji) => {
             setSelectedEmoji(emoji);
           }}
         />
@@ -168,9 +191,6 @@ export const IdeaInputScreen = ({ navigation }) => {
         textAlignVertical="center"
       />
 
-      {/* {image && (
-        <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
-      )} */}
       <FloatingActions>
         <CategorySelectMenu
           onChange={(category) => {
@@ -184,7 +204,8 @@ export const IdeaInputScreen = ({ navigation }) => {
               selectedEmoji,
               selectedCategory,
               images,
-              soundRecording
+              soundRecording,
+              links
             )
           }
         >

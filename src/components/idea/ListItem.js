@@ -12,14 +12,19 @@ const MAX_TITLE_SHOW_LENGTH = 10;
 
 const ItemContainer = styled(CardContainer)`
   padding: 18px 14px;
-  display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: baseline;
+  width: 100%;
 `;
 
 const Emoji = styled.Text`
   font-size: ${({ theme }) => theme.fontSizes.md};
+`;
+
+const RightContent = styled(CenteredRow)`
+  flex: 1;
+  justify-content: flex-end;
 `;
 
 const getFormatedDateDistanceText = (date) => {
@@ -59,15 +64,15 @@ export const IdeaListItem = ({ ideaData }) => {
       <ItemContainer>
         <Row>
           <Emoji>{emoji}</Emoji>
-          <View style={{ marginLeft: 10 }}></View>
-          <CardTitle>{truncatedTitle}</CardTitle>
+          <View style={{ marginLeft: 8 }}></View>
+          <CardTitle numberOfLines={1}>{truncatedTitle}</CardTitle>
         </Row>
 
-        <CenteredRow>
+        <RightContent>
           <CardSubtitle>{getFormatedDateDistanceText(createdAt)}</CardSubtitle>
-          <View style={{ marginLeft: 14 }}></View>
+          <View style={{ marginLeft: 8 }}></View>
           <RightArrowIcon />
-        </CenteredRow>
+        </RightContent>
       </ItemContainer>
     </Pressable>
   );

@@ -1,18 +1,19 @@
 import React from "react";
 
+import { View } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
+import styled from "styled-components";
+import { pageHeaderOptions } from "../theme";
+import { Icons } from "../../components/icons";
+import { IdeaNavigator } from "./idea.navigator";
+import { IdeaContextProvider } from "../../provider/idea";
 import { SettingsScreen } from "../../screens/SettingsScreen";
 import { IdeaInputScreen } from "../../screens/idea/InputScreen";
 import { NewCategoryScreen } from "../../screens/idea/NewCategoryScreen";
-import { IdeaNavigator } from "./idea.navigator";
 import { BottomNavigationBar } from "../../components/BottomNavigationBar";
-import styled from "styled-components";
-import { View } from "react-native";
-import { IdeaContextProvider } from "../../provider/idea";
-import { pageHeaderOptions } from "../theme";
-import { Icons } from "../../components/icons";
+import { LinkAttachmentScreen } from "../../screens/idea/LinkAttachmentScreen";
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -90,6 +91,15 @@ export const HomeNavigator = () => {
             component={NewCategoryScreen}
             options={{
               title: "Create New Category",
+              ...pageHeaderOptions,
+            }}
+          />
+
+          <Stack.Screen
+            name="LinkAttachment"
+            component={LinkAttachmentScreen}
+            options={{
+              title: "Attach Link",
               ...pageHeaderOptions,
             }}
           />
