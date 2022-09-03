@@ -10,6 +10,7 @@ import { IdeaCategoryCard } from "../components/idea/CategoryCard";
 import { LinkAttachment } from "../components/idea/LinkAttachment";
 import { CategorySelectMenu } from "../components/idea/CategorySelect";
 import { getProcessedCategoriesList } from "../components/idea/CategorySelect";
+import { Button } from "../components/Button";
 
 const PageFrame = styled.View`
   margin: 10px 24px;
@@ -29,7 +30,7 @@ const getRecentIdeas = (ideasObj, numOfIdeas = 3) => {
   return ideaList.slice(0, numOfIdeas);
 };
 
-export const Dashboard = ({ route }) => {
+export const Dashboard = ({ route, navigation }) => {
   const { ideaData, isLoading, reloadIdeaData } = useContext(IdeaContext);
   const categories = getProcessedCategoriesList(ideaData);
 
@@ -49,20 +50,25 @@ export const Dashboard = ({ route }) => {
             return <IdeaListItem key={idea.ideaId} ideaData={idea.data} />;
           })}
 
+        <PageFrame />
+        <Button onPress={() => navigation.push("IdeaFullList")}>
+          View All
+        </Button>
+
         {/* Temp Spacer */}
         <PageFrame />
-        <CenteredRow style={{ justifyContent: "space-between" }}>
-          {categories.map((category) => (
-            <IdeaCategoryCard key={category.id} categoryData={category} />
-          ))}
-        </CenteredRow>
+        <ScrollView horizontal>
+          <CenteredRow style={{ justifyContent: "space-between" }}>
+            {categories.map((category) => (
+              <IdeaCategoryCard key={category.id} categoryData={category} />
+            ))}
+          </CenteredRow>
+        </ScrollView>
 
         <PageFrame />
-
         <CategorySelectMenu onChange={(data) => console.log(data)} />
 
         <PageFrame />
-
         <LinkAttachment linkData={{ link: "https://google.com" }} />
       </ScrollView>
     </PageFrame>

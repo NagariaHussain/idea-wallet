@@ -27,7 +27,6 @@ const getFormatedDateDistanceText = (date) => {
     return "";
   }
 
-  console.log(date);
   try {
     const parsedCreatedAt = new Date(date);
     const formatedDistance = formatDistanceToNow(parsedCreatedAt, {
