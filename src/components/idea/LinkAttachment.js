@@ -1,5 +1,5 @@
 import React from "react";
-import { Pressable, View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import styled from "styled-components";
 import { CardContainer } from "../utils/Card";
 import { CopyToClipboardButton } from "../utils/CopyToClipboardButton";
@@ -9,7 +9,7 @@ const LinkContainer = styled(CardContainer)`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 7px 14px 7px 11px;
+  padding: 7px 11px 7px 11px;
 `;
 
 const LinkText = styled.Text`
@@ -19,20 +19,20 @@ const LinkText = styled.Text`
   font-family: ${({ theme }) => theme.fonts.cardTitle};
   text-decoration-line: underline;
   letter-spacing: -0.5px;
+  flex: 1;
 `;
 
-export const LinkAttachment = ({ linkData }) => {
-  const { link } = linkData;
+export const LinkAttachment = ({ link, onDelete }) => {
   return (
     <LinkContainer>
-      <CenteredRow>
+      <CenteredRow style={{ flex: 1 }}>
         <CopyToClipboardButton textContent={link} />
         <View style={{ marginLeft: 14 }}></View>
-        <LinkText>{link}</LinkText>
+        <LinkText numberOfLines={1}>{link}</LinkText>
       </CenteredRow>
-      <Pressable>
+      <TouchableOpacity onPress={onDelete}>
         <TrashCanIcon />
-      </Pressable>
+      </TouchableOpacity>
     </LinkContainer>
   );
 };

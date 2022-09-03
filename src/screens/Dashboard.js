@@ -69,7 +69,11 @@ export const Dashboard = ({ route, navigation }) => {
         <CategorySelectMenu onChange={(data) => console.log(data)} />
 
         <PageFrame />
-        <LinkAttachment linkData={{ link: "https://google.com" }} />
+        <LinkAttachment
+          link="https://google.com/abdshgfshjdfgj/djfg/jdhgjfs?djfhf"
+          onDelete={() => console.log("Deleting link...")}
+        />
+        <PageFrame />
       </ScrollView>
     </PageFrame>
   );
