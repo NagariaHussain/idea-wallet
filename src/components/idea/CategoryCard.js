@@ -10,6 +10,7 @@ const CategoryCardContainer = styled(CardContainer)`
   display: flex;
   justify-content: space-between;
   margin-right: 6px;
+  min-width: 110px;
 `;
 
 const CategoryEmoji = styled.Text`
