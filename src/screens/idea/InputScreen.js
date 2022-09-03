@@ -1,16 +1,11 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import styled, { useTheme } from "styled-components";
 import { Icons } from "../../components/icons";
 import { CenteredRow } from "../../components/utils/Row";
 import { CircularButton, circularPrimaryButton } from "../../components/Button";
 import { TextInput, View, Keyboard } from "react-native";
 import Lottie from "lottie-react-native";
-import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withTiming,
-  withSpring,
-} from "react-native-reanimated";
+
 import { launchCameraAndGetImage } from "../../lib/camera";
 import { EmojiPicker } from "../../components/utils/emojiPicker";
 import { CategorySelectMenu } from "../../components/idea/CategorySelect";
@@ -21,6 +16,7 @@ import {
   startAndGetRecording,
   stopAndGetRecording,
 } from "../../lib/audio";
+import { FloatingActions } from "../../components/idea/FloatingActions";
 
 const SaveIdeaButton = styled(circularPrimaryButton)``;
 
@@ -54,36 +50,6 @@ export const IdeaInputScreen = ({ navigation }) => {
   const [ideaTitle, setIdeaTitle] = useState("");
   const [selectedEmoji, setSelectedEmoji] = useState("🚀");
   const [selectedCategory, setSelectedCategory] = useState(null);
-
-  // Animated Floating Action Button
-  const FABBottomPosition = useSharedValue(20);
-  const FABAnimatedStyles = useAnimatedStyle(() => {
-    return {
-      bottom: FABBottomPosition.value,
-      position: "absolute",
-      right: 0,
-      left: 0,
-      flexDirection: "row",
-      justifyContent: "space-between",
-      alignItems: "center",
-    };
-  });
-
-  useEffect(() => {
-    const showSubscription = Keyboard.addListener("keyboardDidShow", (e) => {
-      FABBottomPosition.value = withTiming(e.endCoordinates.height);
-    });
-    const hideSubscription = Keyboard.addListener("keyboardDidHide", () => {
-      FABBottomPosition.value = withSpring(20, {
-        restDisplacementThreshold: 0.001,
-      });
-    });
-
-    return () => {
-      showSubscription.remove();
-      hideSubscription.remove();
-    };
-  }, []);
 
   const actions = [
     {
@@ -205,8 +171,7 @@ export const IdeaInputScreen = ({ navigation }) => {
       {/* {image && (
         <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
       )} */}
-
-      <Animated.View style={FABAnimatedStyles}>
+      <FloatingActions>
         <CategorySelectMenu
           onChange={(category) => {
             setSelectedCategory(category.id);
@@ -225,7 +190,7 @@ export const IdeaInputScreen = ({ navigation }) => {
         >
           <Icons.CheckIcon />
         </SaveIdeaButton>
-      </Animated.View>
+      </FloatingActions>
     </PageFrame>
   );
 };
