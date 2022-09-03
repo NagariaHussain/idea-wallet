@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext } from "react";
 import styled from "styled-components";
 
 import { CenteredRow } from "../../components/utils/Row";
@@ -7,6 +7,7 @@ import { FloatingActions } from "../../components/idea/FloatingActions";
 import { circularPrimaryButton } from "../../components/Button";
 import { Icons } from "../../components/icons";
 import { createCategory } from "../../lib/storage";
+import { IdeaContext } from "../../provider/idea";
 
 const PageFrame = styled.View`
   margin: 10px 24px;
@@ -27,6 +28,7 @@ const CategoryTextInput = styled.TextInput`
 `;
 
 export const NewCategoryScreen = ({ navigation }) => {
+  const { reloadIdeaData } = useContext(IdeaContext);
   const [selectedEmoji, setSelectedEmoji] = useState("⚡️");
   const [categoryTitle, setCategoryTitle] = useState("");
   const titleInput = useRef(null);
@@ -62,6 +64,8 @@ export const NewCategoryScreen = ({ navigation }) => {
               title: categoryTitle,
               emoji: selectedEmoji,
             });
+
+            await reloadIdeaData();
 
             navigation.navigate("IdeaCategoryScreen", { categoryId });
           }}
