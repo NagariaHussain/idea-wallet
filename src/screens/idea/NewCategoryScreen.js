@@ -33,6 +33,22 @@ export const NewCategoryScreen = ({ navigation }) => {
   const [categoryTitle, setCategoryTitle] = useState("");
   const titleInput = useRef(null);
 
+  const handleCategorySave = async () => {
+    if (categoryTitle.trim() === "") {
+      console.debug("title is required for category.");
+      titleInput.current?.focus(); // Focus the input
+      return;
+    }
+    const categoryId = await createCategory({
+      title: categoryTitle,
+      emoji: selectedEmoji,
+    });
+
+    await reloadIdeaData();
+
+    navigation.navigate("IdeaCategoryScreen", { categoryId });
+  };
+
   return (
     <PageFrame>
       <CenteredRow>
@@ -53,23 +69,7 @@ export const NewCategoryScreen = ({ navigation }) => {
       </CenteredRow>
 
       <FloatingActions>
-        <SaveCategoryButton
-          onPress={async () => {
-            if (categoryTitle.trim() === "") {
-              console.debug("title is required for category.");
-              titleInput.current?.focus();
-              return;
-            }
-            const categoryId = await createCategory({
-              title: categoryTitle,
-              emoji: selectedEmoji,
-            });
-
-            await reloadIdeaData();
-
-            navigation.navigate("IdeaCategoryScreen", { categoryId });
-          }}
-        >
+        <SaveCategoryButton onPress={handleCategorySave}>
           <Icons.CheckIcon />
         </SaveCategoryButton>
       </FloatingActions>
