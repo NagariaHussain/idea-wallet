@@ -15,7 +15,19 @@ const PickerContainer = styled(View)`
   width: 300px;
 `;
 
-export const EmojiPicker = ({ children, onPick }) => {
+export const EmojiButton = styled.View`
+  padding: 15px;
+  border: 1px solid ${({ theme }) => theme.colors.stroke.main};
+  border-radius: 100%;
+  background-color: white;
+  justify-content: center;
+`;
+
+export const Emoji = styled.Text`
+  font-size: ${({ theme }) => theme.fontSizes.lg};
+`;
+
+export const EmojiPicker = ({ children, onPick, selectedEmoji }) => {
   const [showPopover, setShowPopover] = useState(false);
 
   return (
@@ -36,7 +48,9 @@ export const EmojiPicker = ({ children, onPick }) => {
               setShowPopover(true);
             }}
           >
-            {children}
+            <EmojiButton>
+              <Emoji>{selectedEmoji}</Emoji>
+            </EmojiButton>
           </TouchableOpacity>
         </View>
       }

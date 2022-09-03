@@ -29,10 +29,6 @@ const ButtonRow = styled(CenteredRow)`
   align-items: stretch;
 `;
 
-const Emoji = styled.Text`
-  font-size: ${({ theme }) => theme.fontSizes.lg};
-`;
-
 const PageFrame = styled.View`
   margin: 10px 24px;
   flex: 1;
@@ -43,14 +39,6 @@ const IdeaInputBox = styled(TextInput)`
   font-family: ${({ theme }) => theme.fonts.pageHeading};
   align-self: center;
   max-height: 200px;
-`;
-
-const EmojiButton = styled.View`
-  padding: 15px;
-  border: 1px solid ${({ theme }) => theme.colors.stroke.main};
-  border-radius: 100%;
-  background-color: white;
-  justify-content: center;
 `;
 
 export const IdeaInputScreen = ({ navigation }) => {
@@ -150,15 +138,12 @@ export const IdeaInputScreen = ({ navigation }) => {
 
       <ButtonRow>
         <EmojiPicker
+          selectedEmoji={selectedEmoji}
           onPick={(emoji, idx) => {
             console.log("Emoji Picked: ", emoji);
             setSelectedEmoji(emoji);
           }}
-        >
-          <EmojiButton>
-            <Emoji>{selectedEmoji}</Emoji>
-          </EmojiButton>
-        </EmojiPicker>
+        />
 
         {actions.map((item, idx) => {
           return (
