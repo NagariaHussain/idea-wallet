@@ -16,13 +16,15 @@ const PageFrame = styled.View`
 
 export const IdeaDetailScreen = ({ route }) => {
   const ideaId = route.params.ideaId;
-  const { ideaData } = useContext(IdeaContext);
+  const { ideaData, isLoading } = useContext(IdeaContext);
   const idea = ideaData.ideas[ideaId];
   const imageAttachments = ideaData.ideas[ideaId]?.images || []; // Also, handles the case when no image attachments
 
   return (
     <PageFrame>
       <View>
+        {isLoading && <Text>Loading...</Text>}
+
         <Text>Images: {imageAttachments.length}</Text>
         <ImageAttachmentRow images={imageAttachments} />
         <DeleteIdeaButton ideaId={ideaId} />
@@ -32,7 +34,7 @@ export const IdeaDetailScreen = ({ route }) => {
 
         <Text>Voice Note</Text>
         <View style={{ marginBottom: 8 }}></View>
-        {idea.voiceNote ? (
+        {idea?.voiceNote ? (
           <VoiceNotePlayer soundUri={idea.voiceNote.uri} />
         ) : (
           <Button>Record</Button>

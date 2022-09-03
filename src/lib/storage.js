@@ -73,4 +73,6 @@ export const createCategory = async (data) => {
 
   // Save the updated data to the storage
   await saveIdeaDataToStorage(currentIdeaData);
+
+  return newCategoryId;
 };

@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { IdeaListItem } from "../../components/idea/ListItem";
 import { getProcessedCategoriesList } from "../../components/idea/CategorySelect";
 import { CategorySectionHeader } from "../../components/idea/CategorySectionHeader";
-
+import { Button } from "../../components/Button";
 import { IdeaContext } from "../../provider/idea";
 
 const PageFrame = styled.View`
@@ -16,7 +16,11 @@ const CategorySectionDivider = styled.View`
   margin-bottom: 52px;
 `;
 
-export const AllIdeasListScreen = () => {
+const PageHeaderContainer = styled.View`
+  margin-bottom: 30px;
+`;
+
+export const AllIdeasListScreen = ({ navigation }) => {
   const { ideaData, reloadIdeaData, isLoading } = useContext(IdeaContext);
   const data = getProcessedCategoriesList(ideaData);
   const sections = data
@@ -28,6 +32,11 @@ export const AllIdeasListScreen = () => {
 
   return (
     <PageFrame>
+      <PageHeaderContainer>
+        <Button onPress={() => navigation.push("NewCategory")}>
+          Create New Category
+        </Button>
+      </PageHeaderContainer>
       <SectionList
         sections={sections}
         renderItem={({ item }) => <IdeaListItem ideaData={item} />}

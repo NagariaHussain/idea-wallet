@@ -9,3 +9,13 @@ export const theme = {
   fontWeights,
   fontSizes,
 };
+
+export const pageHeaderOptions = {
+  headerTintColor: theme.colors.typography.pageTitle,
+  headerTitleStyle: {
+    fontFamily: theme.fonts.pageTitle,
+    fontWeight: theme.fontWeights.bold,
+    fontSize: theme.fontSizes.sm,
+  },
+  headerBackVisible: true,
+};

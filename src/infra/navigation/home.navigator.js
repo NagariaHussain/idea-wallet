@@ -1,19 +1,18 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import { SettingsScreen } from "../../screens/SettingsScreen";
 import { IdeaInputScreen } from "../../screens/idea/InputScreen";
+import { NewCategoryScreen } from "../../screens/idea/NewCategoryScreen";
 import { IdeaNavigator } from "./idea.navigator";
 import { BottomNavigationBar } from "../../components/BottomNavigationBar";
-import { HomeIcon } from "../../components/icons/HomeIcon";
-import { SettingsIcon } from "../../components/icons/SettingsIcon";
-import styled, { useTheme } from "styled-components";
+import styled from "styled-components";
 import { View } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import { IdeaContextProvider } from "../../provider/idea";
-
+import { pageHeaderOptions } from "../theme";
+import { Icons } from "../../components/icons";
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -32,7 +31,7 @@ const CircularIndicator = styled.View`
 function getTabIconComponent(isFocused, routeName) {
   return (
     <ColumnView>
-      {routeName == "Settings" ? <SettingsIcon /> : <HomeIcon />}
+      {routeName == "Settings" ? <Icons.SettingsIcon /> : <Icons.HomeIcon />}
       <View style={{ marginBottom: 6 }}></View>
       <CircularIndicator isActive={isFocused} />
     </ColumnView>
@@ -40,12 +39,6 @@ function getTabIconComponent(isFocused, routeName) {
 }
 
 const HomeTabNavigator = () => {
-  const navigation = useNavigation();
-
-  useEffect(() => {
-    navigation.push("IdeaInput");
-  }, []);
-
   return (
     <Tab.Navigator tabBar={(props) => <BottomNavigationBar {...props} />}>
       <Tab.Screen
@@ -71,8 +64,6 @@ const HomeTabNavigator = () => {
 };
 
 export const HomeNavigator = () => {
-  const theme = useTheme();
-
   return (
     <IdeaContextProvider>
       <Stack.Navigator>
@@ -90,13 +81,16 @@ export const HomeNavigator = () => {
             component={IdeaInputScreen}
             options={{
               title: "Your Awesome Idea",
-              headerTintColor: theme.colors.typography.pageTitle,
-              headerTitleStyle: {
-                fontFamily: theme.fonts.pageTitle,
-                fontWeight: theme.fontWeights.bold,
-                fontSize: theme.fontSizes.sm,
-              },
-              headerBackVisible: true,
+              ...pageHeaderOptions,
+            }}
+          />
+
+          <Stack.Screen
+            name="NewCategory"
+            component={NewCategoryScreen}
+            options={{
+              title: "Create New Category",
+              ...pageHeaderOptions,
             }}
           />
         </Stack.Group>
