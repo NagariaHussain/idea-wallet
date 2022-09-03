@@ -15,6 +15,7 @@ const CategoryHeaderTitle = styled.Text`
 `;
 
 const CategoryHeaderContainer = styled(CenteredRow)`
+  background-color: ${({ theme }) => theme.colors.background};
   justify-content: space-between;
   align-content: center;
   margin-bottom: 18px;
