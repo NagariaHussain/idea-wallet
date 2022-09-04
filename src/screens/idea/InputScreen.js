@@ -80,10 +80,6 @@ export const IdeaInputScreen = ({ navigation, route }) => {
         navigation.push("LinkAttachment", { existingLinks: links }),
     },
     {
-      icon: Icons.PencilIcon,
-      onPress: () => console.log("pencil pressed."),
-    },
-    {
       icon: Icons.CameraIcon,
       badgeText: images.length || "",
       onPress: async () => {
