@@ -180,7 +180,7 @@ export const IdeaInputScreen = ({ navigation, route }) => {
         autoFocus
         multiline={true}
         selectionColor={theme.colors.typography.pageTitle}
-        placeholder=""
+        placeholder="Your Idea"
         textAlign="center"
         value={ideaTitle}
         onChangeText={setIdeaTitle}
