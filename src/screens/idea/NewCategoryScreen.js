@@ -29,7 +29,7 @@ const CategoryTextInput = styled.TextInput`
 
 export const NewCategoryScreen = ({ navigation }) => {
   const { reloadIdeaData } = useContext(IdeaContext);
-  const [selectedEmoji, setSelectedEmoji] = useState("⚡️");
+  const [selectedEmoji, setSelectedEmoji] = useState("⚽️");
   const [categoryTitle, setCategoryTitle] = useState("");
   const titleInput = useRef(null);
 
