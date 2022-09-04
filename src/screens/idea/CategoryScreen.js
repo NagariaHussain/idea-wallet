@@ -1,21 +1,33 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { ScrollView } from "react-native";
+import styled from "styled-components";
+import { IdeaListItem } from "../../components/idea/ListItem";
+import { EmojiPageHeader } from "../../components/utils/EmojiPageHeader";
+import {
+  PageSubtitle,
+  SecondaryHeading,
+} from "../../components/utils/typography";
+import { IdeaList } from "./IdeaList";
+
+const CategoryDetailScrollView = styled(ScrollView)`
+  padding: 10px 24px;
+  flex: 1;
+`;
 
 export const IdeaCategoryScreen = ({ route }) => {
-  const { categoryId } = route.params;
+  const { categoryData: category } = route.params;
 
   return (
-    <View style={styles.container}>
-      <Text>Category: {categoryId}</Text>
-    </View>
+    <CategoryDetailScrollView>
+      <EmojiPageHeader emoji={category.emoji} title={category.title} />
+      <SecondaryHeading>Ideas</SecondaryHeading>
+      {category.ideas.length > 0 ? (
+        category.ideas.map((idea) => (
+          <IdeaListItem key={idea.id} ideaData={idea} />
+        ))
+      ) : (
+        <PageSubtitle>No ideas yet</PageSubtitle>
+      )}
+    </CategoryDetailScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "white",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

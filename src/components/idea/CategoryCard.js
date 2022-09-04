@@ -20,12 +20,12 @@ const CategoryEmoji = styled.Text`
 `;
 
 export const IdeaCategoryCard = ({ categoryData }) => {
-  const { title, noOfIdeas, emoji, id: categoryId } = categoryData;
+  const { title, noOfIdeas, emoji } = categoryData;
   const navigation = useNavigation();
 
   return (
     <Pressable
-      onPress={() => navigation.push("IdeaCategoryScreen", { categoryId })}
+      onPress={() => navigation.push("IdeaCategoryScreen", { categoryData })}
     >
       <CategoryCardContainer>
         <View>

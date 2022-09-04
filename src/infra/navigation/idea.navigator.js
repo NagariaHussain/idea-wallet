@@ -25,6 +25,10 @@ export const IdeaNavigator = () => (
       name="IdeaDetail"
       component={IdeaDetailScreen}
     />
-    <Stack.Screen name="IdeaCategoryScreen" component={IdeaCategoryScreen} />
+    <Stack.Screen
+      options={{ headerTitle: "Category Details" }}
+      name="IdeaCategoryScreen"
+      component={IdeaCategoryScreen}
+    />
   </Stack.Navigator>
 );

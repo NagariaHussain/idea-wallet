@@ -9,34 +9,15 @@ import { VoiceNotePlayer } from "../../components/idea/VoiceNotePlayer";
 import { DeleteIdeaButton } from "../../components/idea/DeleteIdeaButton";
 import {
   PageSubtitle,
-  PageTitle,
   SecondaryHeading,
 } from "../../components/utils/typography";
-import { CenteredColumn } from "../../components/utils/column";
 import { LinkAttachmentList } from "./LinkAttachmentList";
+import { EmojiPageHeader } from "../../components/utils/EmojiPageHeader";
 
 const IdeaDetailScrollView = styled(ScrollView)`
   padding: 10px 24px;
   flex: 1;
 `;
-
-const HeaderEmoji = styled.Text`
-  font-size: 60px;
-  margin-bottom: 17px;
-`;
-
-const HeaderColumn = styled(CenteredColumn)`
-  margin-bottom: 40px;
-`;
-
-const IdeaHeader = ({ title, emoji }) => {
-  return (
-    <HeaderColumn>
-      <HeaderEmoji>{emoji}</HeaderEmoji>
-      <PageTitle numberOfLines={2}>{title}</PageTitle>
-    </HeaderColumn>
-  );
-};
 
 export const IdeaDetailScreen = ({ route }) => {
   const ideaId = route.params.ideaId;
@@ -50,7 +31,7 @@ export const IdeaDetailScreen = ({ route }) => {
         {isLoading && <Text>Loading...</Text>}
 
         {/* Page Header */}
-        <IdeaHeader title={idea.title} emoji={idea.emoji} />
+        <EmojiPageHeader title={idea.title} emoji={idea.emoji} />
 
         {/* Image Attachements */}
         <SecondaryHeading>Images</SecondaryHeading>

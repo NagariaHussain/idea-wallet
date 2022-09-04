@@ -14,6 +14,7 @@ import {
   PageTitle,
   SecondaryHeading,
 } from "../components/utils/typography";
+import { IdeaList } from "./idea/IdeaList";
 
 const PageFrame = styled.View`
   margin: 10px 24px;
@@ -56,9 +57,7 @@ export const Dashboard = ({ route, navigation }) => {
       <SecondaryHeading>Recent Ideas</SecondaryHeading>
 
       {!isLoading ? (
-        getRecentIdeas(ideaData?.ideas || [], 3).map((idea) => {
-          return <IdeaListItem key={idea.ideaId} ideaData={idea.data} />;
-        })
+        <IdeaList ideas={getRecentIdeas(ideaData?.ideas || [], 3)} />
       ) : (
         <Text>Loading...</Text>
       )}
