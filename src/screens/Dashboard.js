@@ -1,4 +1,4 @@
-import { ScrollView } from "react-native";
+import { ScrollView, View, Text } from "react-native";
 import styled from "styled-components";
 import React, { useContext, useEffect } from "react";
 import { compareDesc as compareDatesDesc } from "date-fns";
@@ -7,13 +7,38 @@ import { IdeaContext } from "../provider/idea";
 import { CenteredRow } from "../components/utils/Row";
 import { IdeaListItem } from "../components/idea/ListItem";
 import { IdeaCategoryCard } from "../components/idea/CategoryCard";
-import { LinkAttachment } from "../components/idea/LinkAttachment";
-import { CategorySelectMenu } from "../components/idea/CategorySelect";
 import { getProcessedCategoriesList } from "../components/idea/CategorySelect";
 import { Button } from "../components/Button";
 
 const PageFrame = styled.View`
   margin: 10px 24px;
+`;
+
+const PageTitle = styled.Text`
+  color: ${({ theme }) => theme.colors.typography.pageTitle};
+  font-family: ${({ theme }) => theme.fonts.pageHeading};
+  font-size: ${({ theme }) => theme.fontSizes.lg};
+  font-weight: ${({ theme }) => theme.fontWeights.extraBold};
+  text-align: left;
+`;
+
+const PageSubtitle = styled.Text`
+  color: ${({ theme }) => theme.colors.typography.pageSubtitle};
+  font-family: ${({ theme }) => theme.fonts.secondaryHeading};
+  font-size: ${({ theme }) => theme.fontSizes.md};
+  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
+  text-align: left;
+`;
+
+const SecondaryHeading = styled.Text`
+  color: ${({ theme }) => theme.colors.typography.heading};
+  font-family: ${({ theme }) => theme.fonts.secondaryHeading};
+  font-size: ${({ theme }) => theme.fontSizes.lg};
+  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
+`;
+
+const DashboardScrollView = styled(ScrollView)`
+  padding: 10px 24px;
 `;
 
 const getRecentIdeas = (ideasObj, numOfIdeas = 3) => {
@@ -42,39 +67,37 @@ export const Dashboard = ({ route, navigation }) => {
   }, [route]);
 
   return (
-    <PageFrame>
-      <ScrollView>
-        {!isLoading &&
-          ideaData.ideas &&
-          getRecentIdeas(ideaData.ideas, 5).map((idea) => {
-            return <IdeaListItem key={idea.ideaId} ideaData={idea.data} />;
-          })}
+    <DashboardScrollView>
+      <PageTitle>Dashboard</PageTitle>
+      <PageSubtitle>Awesome ideas, by you.</PageSubtitle>
 
-        <PageFrame />
-        <Button onPress={() => navigation.push("IdeaFullList")}>
-          View All
-        </Button>
+      <View style={{ marginTop: 30 }}></View>
+      <SecondaryHeading>Recent Ideas</SecondaryHeading>
+      <View style={{ marginTop: 8 }}></View>
 
-        {/* Temp Spacer */}
-        <PageFrame />
-        <ScrollView horizontal>
-          <CenteredRow style={{ justifyContent: "space-between" }}>
-            {categories.map((category) => (
-              <IdeaCategoryCard key={category.id} categoryData={category} />
-            ))}
-          </CenteredRow>
-        </ScrollView>
+      {!isLoading ? (
+        getRecentIdeas(ideaData?.ideas || [], 3).map((idea) => {
+          return <IdeaListItem key={idea.ideaId} ideaData={idea.data} />;
+        })
+      ) : (
+        <Text>Loading...</Text>
+      )}
 
-        <PageFrame />
-        <CategorySelectMenu onChange={(data) => console.log(data)} />
+      <PageFrame />
 
-        <PageFrame />
-        <LinkAttachment
-          link="https://google.com/abdshgfshjdfgj/djfg/jdhgjfs?djfhf"
-          onDelete={() => console.log("Deleting link...")}
-        />
-        <PageFrame />
+      <Button onPress={() => navigation.push("IdeaFullList")}>View All</Button>
+
+      <View style={{ marginTop: 30 }}></View>
+      <SecondaryHeading>Categories</SecondaryHeading>
+      <View style={{ marginTop: 8 }}></View>
+
+      <ScrollView horizontal>
+        <CenteredRow style={{ justifyContent: "space-between" }}>
+          {categories.map((category) => (
+            <IdeaCategoryCard key={category.id} categoryData={category} />
+          ))}
+        </CenteredRow>
       </ScrollView>
-    </PageFrame>
+    </DashboardScrollView>
   );
 };

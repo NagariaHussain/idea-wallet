@@ -13,7 +13,7 @@ const PageFrame = styled.View`
 `;
 
 const CategorySectionDivider = styled.View`
-  margin-bottom: 52px;
+  margin-bottom: 40px;
 `;
 
 const PageHeaderContainer = styled.View`

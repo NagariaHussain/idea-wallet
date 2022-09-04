@@ -12,6 +12,7 @@ const MAX_TITLE_SHOW_LENGTH = 10;
 
 const ItemContainer = styled(CardContainer)`
   padding: 18px 14px;
+  margin-bottom: 6px;
   flex-direction: row;
   justify-content: space-between;
   align-items: baseline;

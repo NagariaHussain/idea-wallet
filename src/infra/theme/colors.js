@@ -10,6 +10,7 @@ export const colors = {
     pageTitle: "#363636",
     heading: "#1D1D1D",
     cardCaption: "#B7B7B7",
+    pageSubtitle: "#8A8A8A",
   },
   stroke: {
     main: "#D2D2D2",
