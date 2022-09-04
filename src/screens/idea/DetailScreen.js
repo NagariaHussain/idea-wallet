@@ -1,19 +1,42 @@
 import React from "react";
 import { useContext } from "react";
-import { View, Text } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 
 import styled from "styled-components";
-import { Button } from "../../components/Button";
 import { IdeaContext } from "../../provider/idea";
 import { ImageAttachmentRow } from "./ImageAttachmentRow";
-import { LinkAttachment } from "../../components/idea/LinkAttachment";
 import { VoiceNotePlayer } from "../../components/idea/VoiceNotePlayer";
 import { DeleteIdeaButton } from "../../components/idea/DeleteIdeaButton";
+import {
+  PageSubtitle,
+  PageTitle,
+  SecondaryHeading,
+} from "../../components/utils/typography";
+import { CenteredColumn } from "../../components/utils/column";
+import { LinkAttachmentList } from "./LinkAttachmentList";
 
-const PageFrame = styled.View`
-  margin: 10px 24px;
+const IdeaDetailScrollView = styled(ScrollView)`
+  padding: 10px 24px;
   flex: 1;
 `;
+
+const HeaderEmoji = styled.Text`
+  font-size: 60px;
+  margin-bottom: 17px;
+`;
+
+const HeaderColumn = styled(CenteredColumn)`
+  margin-bottom: 40px;
+`;
+
+const IdeaHeader = ({ title, emoji }) => {
+  return (
+    <HeaderColumn>
+      <HeaderEmoji>{emoji}</HeaderEmoji>
+      <PageTitle numberOfLines={2}>{title}</PageTitle>
+    </HeaderColumn>
+  );
+};
 
 export const IdeaDetailScreen = ({ route }) => {
   const ideaId = route.params.ideaId;
@@ -22,35 +45,32 @@ export const IdeaDetailScreen = ({ route }) => {
   const imageAttachments = ideaData.ideas[ideaId]?.images || []; // Also, handles the case when no image attachments
 
   return (
-    <PageFrame>
+    <IdeaDetailScrollView>
       <View>
         {isLoading && <Text>Loading...</Text>}
 
-        <Text>Images: {imageAttachments.length}</Text>
+        {/* Page Header */}
+        <IdeaHeader title={idea.title} emoji={idea.emoji} />
+
+        {/* Image Attachements */}
+        <SecondaryHeading>Images</SecondaryHeading>
         <ImageAttachmentRow images={imageAttachments} />
 
-        {/* TODO: Replace with a spacer component */}
-        <View style={{ marginBottom: 20 }}></View>
-
-        <Text>Voice Note</Text>
-        <View style={{ marginBottom: 8 }}></View>
+        {/* Voice Note Attachment */}
+        <SecondaryHeading>Voice Note</SecondaryHeading>
         {idea?.voiceNote ? (
           <VoiceNotePlayer soundUri={idea.voiceNote.uri} />
         ) : (
-          <Button>Record</Button>
+          <PageSubtitle>Not Attached</PageSubtitle>
         )}
 
-        <View style={{ marginBottom: 8 }}></View>
-        <Text>Links</Text>
-        <View style={{ marginBottom: 8 }}></View>
+        {/* Link Attachments */}
+        <SecondaryHeading>Links</SecondaryHeading>
+        <LinkAttachmentList links={idea?.links} />
 
-        {(idea?.links || []).map((link) => (
-          <LinkAttachment key={link} link={link} />
-        ))}
-
-        <View style={{ marginBottom: 8 }}></View>
+        {/* Delete Idea Button */}
         <DeleteIdeaButton ideaId={ideaId} />
       </View>
-    </PageFrame>
+    </IdeaDetailScrollView>
   );
 };

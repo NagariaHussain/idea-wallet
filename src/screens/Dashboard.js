@@ -9,32 +9,14 @@ import { IdeaListItem } from "../components/idea/ListItem";
 import { IdeaCategoryCard } from "../components/idea/CategoryCard";
 import { getProcessedCategoriesList } from "../components/idea/CategorySelect";
 import { Button } from "../components/Button";
+import {
+  PageSubtitle,
+  PageTitle,
+  SecondaryHeading,
+} from "../components/utils/typography";
 
 const PageFrame = styled.View`
   margin: 10px 24px;
-`;
-
-const PageTitle = styled.Text`
-  color: ${({ theme }) => theme.colors.typography.pageTitle};
-  font-family: ${({ theme }) => theme.fonts.pageHeading};
-  font-size: ${({ theme }) => theme.fontSizes.lg};
-  font-weight: ${({ theme }) => theme.fontWeights.extraBold};
-  text-align: left;
-`;
-
-const PageSubtitle = styled.Text`
-  color: ${({ theme }) => theme.colors.typography.pageSubtitle};
-  font-family: ${({ theme }) => theme.fonts.secondaryHeading};
-  font-size: ${({ theme }) => theme.fontSizes.md};
-  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
-  text-align: left;
-`;
-
-const SecondaryHeading = styled.Text`
-  color: ${({ theme }) => theme.colors.typography.heading};
-  font-family: ${({ theme }) => theme.fonts.secondaryHeading};
-  font-size: ${({ theme }) => theme.fontSizes.lg};
-  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
 `;
 
 const DashboardScrollView = styled(ScrollView)`
@@ -71,9 +53,7 @@ export const Dashboard = ({ route, navigation }) => {
       <PageTitle>Dashboard</PageTitle>
       <PageSubtitle>Awesome ideas, by you.</PageSubtitle>
 
-      <View style={{ marginTop: 30 }}></View>
       <SecondaryHeading>Recent Ideas</SecondaryHeading>
-      <View style={{ marginTop: 8 }}></View>
 
       {!isLoading ? (
         getRecentIdeas(ideaData?.ideas || [], 3).map((idea) => {
@@ -87,9 +67,7 @@ export const Dashboard = ({ route, navigation }) => {
 
       <Button onPress={() => navigation.push("IdeaFullList")}>View All</Button>
 
-      <View style={{ marginTop: 30 }}></View>
       <SecondaryHeading>Categories</SecondaryHeading>
-      <View style={{ marginTop: 8 }}></View>
 
       <ScrollView horizontal>
         <CenteredRow style={{ justifyContent: "space-between" }}>

@@ -36,7 +36,7 @@ export const DeleteIdeaButton = ({ ideaId }) => {
 
   return (
     <Button type="danger" onPress={showDeletionAlert}>
-      Delete
+      Delete Idea
     </Button>
   );
 };
