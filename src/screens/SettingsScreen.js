@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from "react-native";
 export const SettingsScreen = () => {
   return (
     <View style={styles.container}>
-      <Text>Settings Screen</Text>
+      <Text>Coming Soon.</Text>
     </View>
   );
 };
