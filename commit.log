@@ -1,0 +1,97 @@
+ffbd1ee feat: Idea Category Screen!
+09110bc refactor: Clean up Idea Details page
+906f5f3 fix: Show placeholder on idea input box
+ddc03b8 chore: Settings Screen remains coming soon for now
+0debbd5 fix: Better default emoji for category
+d778e62 fix: Remove unused pencil button
+7bb2b40 chore: Cleanup Dashboard page
+1c87b60 feat: Link Attachments!
+d9dbbb4 refactor: Attachment links
+1f531ef refactor: Extract category creations to a separate function
+c40a18a fix: Reload after creating a new category
+e3b34bf fix: Category card height
+8bab8ee fix: Set min width for category card
+d9cbb1c chore: Link Idea List page to dashboard
+cba514a feat: `C`reate new categories!
+5bc9b69 refactor: Extract out floating actions component
+206c9e5 refactor: Self sufficient emoji picker!
+b494f6d fix: Add background color to section headers
+d58a17c fix: Center align `Button` text
+68dec48 refactor: Separate out category section header component
+0705dd7 feat: Categorized Ideas Full List Screen
+8912007 chore: Rearrange imports
+e5edd17 feat: Utitlity function to create new category
+3a93017 fix: Pluralization
+eca7167 refactor: Separate variabel
+5bc3fb2 refactor: Store idea id's in array inside category obj
+744109c feat: Dynamic Categories!
+17a0c11 refactor: Use `TouchableOpacity` instead of `Pressable` for copy to clipboard button
+d5b2deb refactor: Extract Progress Bar component
+fdb40be feat: Better position indicator!
+9f96307 feat: Voice note player!
+84b6056 feat: Image Viewer
+589d46a fix: Handle case when voice not is null
+94dde3e feat: Save sound attachment along with idea to storage
+64b835b feat: Show animation while recording audio
+b31c7af chore: Add `lottie-react-native`
+bf19f85 feat: Record and play sounds!
+41d4532 refactor: Extract out `ImageAttachmentRow` component
+b10ff44 refactor: Extract out `DeleteIdeaButton` component
+e727670 feat: `D`elete Idea
+94a2531 feat: Store and Process `createdAt` for ideas
+55c44b7 feat: Library for sound recording!
+51abe74 fix: Truncate idea title
+aeab6a8 feat: Store and display image attachments
+c52a193 refactor: Extract Circular Badge component
+7f8d504 feat: Circular Badge
+b96e7f0 fix: Use temperory scroll view on dashboard
+6ff4168 fix: Reload not working
+f288a06 feat: `C`reate New Idea!
+cd9dfd6 chore: Add npm deps to generate UUIDs
+465e690 feat: Navigate to input screen on initial load
+94dc6f0 refactor: Make input screen a 'modal'
+2323241 feat: Animated FAB using `reanimated`
+85ad379 fix: Remove unused code
+aaf0b13 feat: FAB
+468c5ef feat: Basic idea title input box
+dce61f6 fix: Add accessbility label to emoji's
+af46746 perf: Use Flash List to show the emoji grid
+bac5ee1 fix: Remove unused deps
+78090c0 feat: Emoji Picker
+d354a37 fix: Handle image pick cancelled
+e9301cf feat: Camera integration
+5574903 refactor: Input screen actions
+2b148d9 refactor: Icons & Circular button
+eb1c4a7 feat: Simple mock idea data provider with AsyncStorage
+7e067e3 fix: Component name
+4b314b0 feat: More icon components!
+deab8e1 fix: Alert styling
+7993c9a feat: Link attachment component
+e880762 refactor: Pass categories and onChange as props
+cd08200 feat: Basic select menu component
+684ed69 fix: Hide header in dashboard
+3199216 feat: Wire Category screen navigation
+d7e57e4 feat: Category Card Component
+ef699fc refactor: Extract card container with core styles
+93708fd refactor: Extract card subtitle
+da92e0a refactor: Extract Card Title component
+722edca feat: Bottom Navigation Bar
+900e5e0 refactor: Rename `user` to `isAuthenticated`
+c4ea899 refactor: Centered row component
+262b294 refactor: Extract Row component
+5489ef9 feat: Idea List Item component
+57bd011 feat: Authentication powered by supabase auth
+f13af4c feat: Overall navigation structure
+4176be2 feat: Login and Signup button in auth home screen
+0185914 feat: Setup Basic Navigation
+9026f82 fix: Pass onPress down
+6a07a62 chore: Introduce sizes (border radius) in theme
+0e56d42 feat: Button component
+00019a2 fix: Introduce background color
+cfe4cee fix: Font sizes should contain unit
+d4588c9 feat: Theme setup
+044d93b feat: Custom Fonts!
+ebb06e9 feat: Set up styled components
+6955b14 feat: Configure eslint & prettier
+1405e6b chore: Add README
+ba85059 Created a new Expo app
