@@ -44,7 +44,7 @@ export const ImageAttachmentRow = ({ images, ideaId }) => {
             images={images}
             imageIndex={currentImageIndex}
             onRequestClose={() => setIsImageViewerVisible(false)}
-          />{" "}
+          />
         </>
       ) : (
         <PageSubtitle>No Images</PageSubtitle>
