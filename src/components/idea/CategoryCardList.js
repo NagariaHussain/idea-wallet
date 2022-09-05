@@ -7,7 +7,9 @@ import { IdeaCategoryCard } from "./CategoryCard";
 
 const CategoryListContainer = styled(ScrollView).attrs({
   horizontal: true,
-})``;
+})`
+  padding-bottom: 12px;
+`;
 
 const CategoryRow = styled(CenteredRow)`
   justify-content: center;

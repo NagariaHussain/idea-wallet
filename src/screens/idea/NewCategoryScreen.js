@@ -46,7 +46,13 @@ export const NewCategoryScreen = ({ navigation }) => {
 
     await reloadIdeaData();
 
-    navigation.navigate("IdeaCategoryScreen", { categoryId });
+    navigation.navigate("IdeaCategoryScreen", {
+      categoryData: {
+        title: categoryTitle,
+        emoji: selectedEmoji,
+        id: categoryId,
+      },
+    });
   };
 
   return (
@@ -55,7 +61,6 @@ export const NewCategoryScreen = ({ navigation }) => {
         <EmojiPicker
           selectedEmoji={selectedEmoji}
           onPick={(emoji, idx) => {
-            console.log("Emoji Picked: ", emoji);
             setSelectedEmoji(emoji);
           }}
         />

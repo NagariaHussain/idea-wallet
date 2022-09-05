@@ -7,7 +7,6 @@ import {
   PageSubtitle,
   SecondaryHeading,
 } from "../../components/utils/typography";
-import { IdeaList } from "./IdeaList";
 
 const CategoryDetailScrollView = styled(ScrollView)`
   padding: 10px 24px;
@@ -16,6 +15,10 @@ const CategoryDetailScrollView = styled(ScrollView)`
 
 export const IdeaCategoryScreen = ({ route }) => {
   const { categoryData: category } = route.params;
+
+  if (!category.ideas) {
+    category.ideas = [];
+  }
 
   return (
     <CategoryDetailScrollView>
