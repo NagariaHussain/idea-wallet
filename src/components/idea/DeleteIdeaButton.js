@@ -35,7 +35,11 @@ export const DeleteIdeaButton = ({ ideaId }) => {
   };
 
   return (
-    <Button type="danger" onPress={showDeletionAlert}>
+    <Button
+      style={{ marginBottom: 70 }}
+      type="danger"
+      onPress={showDeletionAlert}
+    >
       Delete Idea
     </Button>
   );
