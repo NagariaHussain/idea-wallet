@@ -70,9 +70,11 @@ export const Dashboard = ({ route, navigation }) => {
 
       <ScrollView horizontal>
         <CenteredRow style={{ justifyContent: "space-between" }}>
-          {categories.map((category) => (
-            <IdeaCategoryCard key={category.id} categoryData={category} />
-          ))}
+          {categories
+            .filter((category) => Boolean(category.title))
+            .map((category) => (
+              <IdeaCategoryCard key={category.id} categoryData={category} />
+            ))}
         </CenteredRow>
       </ScrollView>
     </DashboardScrollView>

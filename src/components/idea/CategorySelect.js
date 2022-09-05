@@ -30,6 +30,11 @@ export const getProcessedCategoriesList = (ideaData) => {
   const categoriesList = [];
   for (let categoryId in ideaData.categories) {
     const categoryObj = ideaData.categories[categoryId];
+
+    if (!categoryObj.title) {
+      continue;
+    }
+
     categoriesList.push({
       ...categoryObj,
       noOfIdeas: categoryObj.ideas.length,
