@@ -102,6 +102,11 @@ export const IdeaInputScreen = ({ navigation, route }) => {
       return;
     }
 
+    if (recordingInProgress) {
+      await stopAndGetRecording(soundRecording);
+      setRecordingInProgress(false);
+    }
+
     await createIdea({
       title,
       emoji,
@@ -114,6 +119,7 @@ export const IdeaInputScreen = ({ navigation, route }) => {
     });
 
     Keyboard.dismiss();
+
     navigation.navigate("IdeaDashboard", { reloadData: true });
   }
 
@@ -151,11 +157,10 @@ export const IdeaInputScreen = ({ navigation, route }) => {
               recordingAnimation.current?.play();
               setSoundRecording(recording);
             } else {
-              const recordedSound = await stopAndGetRecording(soundRecording);
+              await stopAndGetRecording(soundRecording);
               setRecordingInProgress(false);
               // Play the recorded sound
               // TODO: Refactor to a separate control
-              await playRecording(recordedSound);
             }
           }}
         >
