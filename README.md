@@ -110,7 +110,7 @@ This is my favorite part of the Product Design process. In my opinion, it is all
 
 This phase involved choosing colors, fonts, sizes etc. This is what makes the app look polished and visually pleasing.
 
-### The Core Components
+### The Core Figma Components
 
 I have extensively used Figma's component feature to create reusable components that are used through out the app screen designs. This also helped a lot while developing the app, as I started by directly building these components as React components which, though initially a slow process, paid of a lot at later stages.
 
@@ -215,6 +215,12 @@ import { useTheme } from "styled-components";
 ```
 
 Isn't the `styled-components` approach too awesome?!
+
+### Where is the data stored?
+
+All the data is stored locally on the user's phone. This is made possible by the `@react-native-async-storage/async-storage` package. Check out the `src/lib/storage.js` for all the utility function related managing data on the phone storage.
+
+The data is initially loaded by the `IdeaProvider` (`src/provider/idea.js`) and it is available in all the screens of the `HomeNavigator`
 
 ### Entry Points: App.js
 
