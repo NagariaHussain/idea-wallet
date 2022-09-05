@@ -9,7 +9,9 @@ export const Navigation = () => {
 
   return (
     <NavigationContainer>
-      {isAuthenticated === true ? <HomeNavigator /> : <AuthNavigator />}
+      <HomeNavigator />
+      {/* No Longer Required to login at startup */}
+      {/* {isAuthenticated === true ? <HomeNavigator /> : <AuthNavigator />} */}
     </NavigationContainer>
   );
 };

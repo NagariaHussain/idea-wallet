@@ -2,6 +2,21 @@
 
 # The Idea Wallet App
 
+## Running the app locally
+
+* Extract the ZIP files locally and open a terminal window at the root of `idea-wallet` folder
+* Make sure you have expo-cli installed
+* Run `yarn` to install dependencies
+* Run `npx expo start` to start the expo server
+* [iOS Recommended] Either use the QR code to run the app on your phone (using Expo Go app)
+* Or press `i` to launch the app on iOS simulator (assuming if you have that installed)
+
+## Expo Snack Link
+
+<https://snack.expo.dev/@hussain786/67fe7f>
+
+Even though, I have uploaded the project to expo snack playground, it doesn't work. They have some bugs related to installing dependencies (for instance svg transformation and image viewing library). Hence, I suggest running the app locally for testing purposes.
+
 ## Introduction
 
 Introducing the **Idea Wallet** app. Built with React Native (expo).
