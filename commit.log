@@ -1,3 +1,12 @@
+dd35400 chore: Rearrange imports
+db5cab8 refactor: Extract out category card list component
+a1ba911 fix: Stop voice recording on idea save
+0f857cd fix: Delete Idea button hiding behind status bar
+a134b31 fix: Typo
+0493dc7 fix: Handle categories with empty title
+f01a6b9 docs: Update
+7c8572f docs: Update
+ddbb043 docs: Start writing the report, no seriously.
 ffbd1ee feat: Idea Category Screen!
 09110bc refactor: Clean up Idea Details page
 906f5f3 fix: Show placeholder on idea input box

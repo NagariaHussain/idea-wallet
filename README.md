@@ -14,6 +14,10 @@ The hands-on video gives a much better overview of the app than it is possible w
 
 Video Link: <"TODO: Update Link"> [YouTube](https://hussain.codes)
 
+## Version Control
+
+I used Git/GitHub to version control my source code. I have included the commit log (the output of running `git log`) in a "commit.log" file located at the root of the project. There are about 106 commit!
+
 ## Ideation
 
 First of all, thank you for making it an open-ended project! This made it a very interesting project to work on. I started by asking my colleagues for suggestions. I got some pretty good ideas from them. Here are a few of them:
