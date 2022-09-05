@@ -87,6 +87,43 @@ I have extensively used Figma's component feature to create reusable components 
 
 ![](.github/images/Components.png)
 
+## Development
+
+### Entry Points: App.js
+
+This is exactly what is returned by the `App` component:
+
+```js
+<ThemeProvider theme={theme}>
+    <AuthProvider>
+        <SafeAreaView style={{ flex: 1 }}>
+            <Navigation />
+        </SafeAreaView>
+    </AuthProvider>
+    <AlertMessage position="top" />
+</ThemeProvider>
+```
+
+There are two main providers: `ThemeProvider` (which comes from `styled-components`) and `AuthProvider` (which I have implemented to provide authentication state for Supabase Auth). As you can see, a `Navigation` component is rendered at root. The Navigation component then manages all the screens using React Navigation, as discussed more in the next section.
+
+### Navigation
+
+The entry point for Navigation is located at `src/infra/navigation/index.js`. Basically it is a wrapper around React Navigation's `NavigationComponent` and renders either the `HomeNavigator` or `AuthNavigator` based on the authentication status. Currently, the authentication is useless, so I am just rendering the home navigator.
+
+There is a lot of nesting of Navigators (Stack, Tab etc.) going on here, a diagram will give us a much better idea:
+
+![](.github/images/Navigation-Arch.jpg)
+
+As you see in the diagram, to achieve the desired navigation flow, I have used many advanced features provided by React Navigation like Tab Navigator, Stack Navigator, Navigation groups, Modal pages (which slide in from bottom and can be swiped down to close, like the New Idea Input Screen). Now, let's talk about that lit bottom tab bar!
+
+### Bottom Tab Bar
+
+I spent a whole day on this one 😅. While designing I didn't knew it would be a "little" hard to implement as expected, but it turned out awesome!
+
+![](.github/images/Idea-Dashboard.png)
+
+It is always present on the screen, except for the modal screens like new idea and category input. This is a standalone React component that I created, code can be found at `src/components/BottomNavigationBar.js`.
+
 ## New Stuff Used Not in Course
 
 * Styled Components
@@ -104,13 +141,19 @@ I have extensively used Figma's component feature to create reusable components 
 
 ## The Emoji Picker
 
-* Popover
-* gemoji
-* Performant List using Flash list
+This is one of my favorite components. It uses the below 3 libraries to work:
 
-FAB Button based on: <https://snack.expo.dev/@andypandy/animated-button-above-keyboard?platform=ios>
+1. `gemoji`: List of emojis (with descriptions) used by GitHub.
+1. `react-native-popover-view`: For shown the popover
+1. `@shopify/flash-list`: For rendering the list of emojis to the popover view.
+
+![](.github/images/Emoji-Picker.png)
+
+I had to use `flash-list` because the normal scroll view/flat list were rendering very slow due to the large number of emojis (~2000) and I wanted to make it snappy!
 
 ## The `FloatingActions` component
+
+Based on: <https://snack.expo.dev/@andypandy/animated-button-above-keyboard?platform=ios>
 
 ## The Voice Note player
 
@@ -128,5 +171,15 @@ The Scope. I had spent so much time designing the app and aiming for a lot of fe
 1. Settings Screen (themes)
 2. Update an existing idea and its attachments
 3. Sync to Cloud
+
+## Further Improvement
+
+I plan to continue working on this app even after submitting this assignment. Here are a few thing that can be improved / introduced in the idea wallet app before publishing it to the app stores:
+
+* Customized Splash Screen
+* A Neat App Icon
+* Emoji Picker enhancements: search by keyword and scroll to the currently picked emoji.
+* UX for recording voice Notes, currently if we record a voice note and then again tap the mic button, the previous recording is overwritten :(.
+* Color Theme Preference in settings
 
 ## Conclusion
