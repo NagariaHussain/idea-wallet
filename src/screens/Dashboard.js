@@ -1,5 +1,5 @@
-import { ScrollView, Text } from "react-native";
 import styled from "styled-components";
+import { ScrollView, Text } from "react-native";
 import React, { useContext, useEffect } from "react";
 import { compareDesc as compareDatesDesc } from "date-fns";
 

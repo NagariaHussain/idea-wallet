@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
 import { Alert } from "react-native";
+import React, { useContext } from "react";
+import { useNavigation } from "@react-navigation/native";
+
 import { Button } from "../Button";
 import { deleteIdea } from "../../lib/storage";
-import { useNavigation } from "@react-navigation/native";
 import { IdeaContext } from "../../provider/idea";
 
 export const DeleteIdeaButton = ({ ideaId }) => {
