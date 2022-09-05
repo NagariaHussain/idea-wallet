@@ -1,13 +1,9 @@
-import { ScrollView, View, Text } from "react-native";
+import { ScrollView, Text } from "react-native";
 import styled from "styled-components";
 import React, { useContext, useEffect } from "react";
 import { compareDesc as compareDatesDesc } from "date-fns";
 
 import { IdeaContext } from "../provider/idea";
-import { CenteredRow } from "../components/utils/Row";
-import { IdeaListItem } from "../components/idea/ListItem";
-import { IdeaCategoryCard } from "../components/idea/CategoryCard";
-import { getProcessedCategoriesList } from "../components/idea/CategorySelect";
 import { Button } from "../components/Button";
 import {
   PageSubtitle,
@@ -15,6 +11,8 @@ import {
   SecondaryHeading,
 } from "../components/utils/typography";
 import { IdeaList } from "./idea/IdeaList";
+import { CategoryCardList } from "../components/idea/CategoryCardList";
+import { getProcessedCategoriesList } from "../components/idea/CategorySelect";
 
 const PageFrame = styled.View`
   margin: 10px 24px;
@@ -68,15 +66,7 @@ export const Dashboard = ({ route, navigation }) => {
 
       <SecondaryHeading>Categories</SecondaryHeading>
 
-      <ScrollView horizontal>
-        <CenteredRow style={{ justifyContent: "space-between" }}>
-          {categories
-            .filter((category) => Boolean(category.title))
-            .map((category) => (
-              <IdeaCategoryCard key={category.id} categoryData={category} />
-            ))}
-        </CenteredRow>
-      </ScrollView>
+      <CategoryCardList categories={categories} />
     </DashboardScrollView>
   );
 };
