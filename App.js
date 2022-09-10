@@ -48,7 +48,7 @@ export default function App() {
     <>
       <ThemeProvider theme={theme}>
         <AuthProvider>
-          <SafeAreaView style={{ flex: 1 }}>
+          <SafeAreaView style={{ flex: 1, backgroundColor: "#f5f5f5" }}>
             <Navigation />
           </SafeAreaView>
         </AuthProvider>
