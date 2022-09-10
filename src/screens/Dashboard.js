@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { ScrollView, Text } from "react-native";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { compareDesc as compareDatesDesc } from "date-fns";
 
 import { IdeaContext } from "../provider/idea";
@@ -13,6 +13,7 @@ import {
 import { IdeaList } from "./idea/IdeaList";
 import { CategoryCardList } from "../components/idea/CategoryCardList";
 import { getProcessedCategoriesList } from "../components/idea/CategorySelect";
+import { SearchBox } from "../components/idea/SearchBox";
 
 const PageFrame = styled.View`
   margin: 10px 24px;
@@ -37,6 +38,7 @@ const getRecentIdeas = (ideasObj, numOfIdeas = 3) => {
 };
 
 export const Dashboard = ({ route, navigation }) => {
+  const [searchText, setSearchText] = useState("");
   const { ideaData, isLoading, reloadIdeaData } = useContext(IdeaContext);
   const categories = getProcessedCategoriesList(ideaData);
 
@@ -51,6 +53,12 @@ export const Dashboard = ({ route, navigation }) => {
     <DashboardScrollView>
       <PageTitle>Dashboard</PageTitle>
       <PageSubtitle>Awesome ideas, by you.</PageSubtitle>
+
+      <SearchBox
+        value={searchText}
+        onChangeText={setSearchText}
+        onSubmitEditing={() => console.debug("Searching")}
+      />
 
       <SecondaryHeading>Recent Ideas</SecondaryHeading>
 
