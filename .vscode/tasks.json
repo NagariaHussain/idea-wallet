@@ -1,0 +1,26 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"command": "npx expo start --ios",
+			"problemMatcher": [],
+			"label": "Start Expo Project",
+			"detail": "npx expo start --ios",
+			 "runOptions": {
+				"runOn": "folderOpen"
+			 },
+			 "isBackground": true,
+			 "presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": false,
+				"panel": "dedicated",
+				"showReuseMessage": true,
+				"clear": false,
+				"group": "my-group",
+				"close": false
+			 }
+		}
+	]
+}
