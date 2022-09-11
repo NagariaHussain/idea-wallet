@@ -1,10 +1,11 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { LoginWithNotionButton } from "../components/auth/LoginWithNotionButton";
 
 export const SettingsScreen = () => {
   return (
     <View style={styles.container}>
-      <Text>Coming Soon.</Text>
+      <LoginWithNotionButton />
     </View>
   );
 };

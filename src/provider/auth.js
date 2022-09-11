@@ -9,7 +9,7 @@ const AuthProvider = (props) => {
   const [session, setSession] = useState(null);
 
   useEffect(() => {
-    const supabaseSession = supabase.auth.session();
+    const supabaseSession = null;
     setSession(supabaseSession);
     setIsAuthenticated(supabaseSession ? true : false);
 
@@ -22,7 +22,7 @@ const AuthProvider = (props) => {
     );
 
     return () => {
-      authListener.unsubscribe();
+      authListener.subscription.unsubscribe();
     };
   }, [isAuthenticated]);
 

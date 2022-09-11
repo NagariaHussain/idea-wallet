@@ -47,7 +47,7 @@ export const Dashboard = ({ route, navigation }) => {
       console.log("Reloading data");
       reloadIdeaData();
     }
-  }, [route]);
+  }, [route.params?.reloadData, route.params, reloadIdeaData]);
 
   return (
     <DashboardScrollView>
