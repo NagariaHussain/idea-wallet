@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ScrollView, Text } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { compareDesc as compareDatesDesc } from "date-fns";
 
@@ -75,6 +75,12 @@ export const Dashboard = ({ route, navigation }) => {
       <SecondaryHeading>Categories</SecondaryHeading>
 
       <CategoryCardList categories={categories} />
+
+      <Button onPress={() => navigation.push("NewCategory")}>
+        New Category
+      </Button>
+
+      <View style={{marginBottom: 100}}></View>
     </DashboardScrollView>
   );
 };
