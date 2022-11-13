@@ -20,13 +20,16 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "codes.hussain.idea_wallet"
+      "bundleIdentifier": "codes.hussain.idea-wallet"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -38,6 +41,11 @@
           "photosPermission": "The app accesses your photos to attach them to your ideas."
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "0783d4f5-9f63-41bb-884a-20af9a911f51"
+      }
+    }
   }
 }
