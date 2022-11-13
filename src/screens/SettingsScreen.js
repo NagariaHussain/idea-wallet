@@ -5,6 +5,7 @@ export const SettingsScreen = () => {
   return (
     <View style={styles.container}>
       <Text>Coming Soon.</Text>
+      <Text>Send Feedback to hussain@frappe.io</Text>
     </View>
   );
 };
