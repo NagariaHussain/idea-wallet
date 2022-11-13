@@ -14,10 +14,7 @@ import { IdeaList } from "./idea/IdeaList";
 import { CategoryCardList } from "../components/idea/CategoryCardList";
 import { getProcessedCategoriesList } from "../components/idea/CategorySelect";
 import { SearchBox } from "../components/idea/SearchBox";
-
-const PageFrame = styled.View`
-  margin: 10px 24px;
-`;
+import { PageFrame } from "../components/utils/PageFrame";
 
 const DashboardScrollView = styled(ScrollView)`
   padding: 10px 24px;
@@ -57,7 +54,13 @@ export const Dashboard = ({ route, navigation }) => {
       <SearchBox
         value={searchText}
         onChangeText={setSearchText}
-        onSubmitEditing={() => console.debug("Searching")}
+        onSubmitEditing={() => {
+          if (searchText) {
+            navigation.push("IdeaSearchResults", {
+              query: searchText,
+            });
+          }
+        }}
       />
 
       <SecondaryHeading>Recent Ideas</SecondaryHeading>
@@ -80,7 +83,7 @@ export const Dashboard = ({ route, navigation }) => {
         New Category
       </Button>
 
-      <View style={{marginBottom: 100}}></View>
+      <View style={{ marginBottom: 100 }}></View>
     </DashboardScrollView>
   );
 };

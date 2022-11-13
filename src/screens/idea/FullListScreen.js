@@ -6,11 +6,7 @@ import { getProcessedCategoriesList } from "../../components/idea/CategorySelect
 import { CategorySectionHeader } from "../../components/idea/CategorySectionHeader";
 import { Button } from "../../components/Button";
 import { IdeaContext } from "../../provider/idea";
-
-const PageFrame = styled.View`
-  margin: 10px 24px;
-  flex: 1;
-`;
+import { PageFrame } from "../../components/utils/PageFrame";
 
 const CategorySectionDivider = styled.View`
   margin-bottom: 40px;

@@ -5,6 +5,8 @@ import { Dashboard } from "../../screens/Dashboard";
 import { IdeaDetailScreen } from "../../screens/idea/DetailScreen";
 import { IdeaCategoryScreen } from "../../screens/idea/CategoryScreen";
 import { AllIdeasListScreen } from "../../screens/idea/FullListScreen";
+import { SearchResultsScreen } from "../../screens/search/ResultsScreen";
+
 
 const Stack = createNativeStackNavigator();
 
@@ -14,6 +16,11 @@ export const IdeaNavigator = () => (
       options={{ headerShown: false }}
       name="IdeaDashboard"
       component={Dashboard}
+    />
+    <Stack.Screen
+      options={{ headerTitle: "Results" }}
+      name="IdeaSearchResults"
+      component={SearchResultsScreen}
     />
     <Stack.Screen
       options={{ headerTitle: "All Ideas" }}

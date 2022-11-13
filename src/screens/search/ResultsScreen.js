@@ -1,19 +1,36 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import Fuse from "fuse.js"; // For Search
+import { useContext } from "react";
+import { IdeaList } from "../idea/IdeaList";
+import { IdeaContext } from "../../provider/idea";
+import { PageFrame } from "../../components/utils/PageFrame";
 
-export const SearchResultsScreen = () => {
-  return (
-    <View style={styles.container}>
-      <Text>Search Results Screen</Text>
-    </View>
-  );
+const getIdeasArrayFromObject = (obj) => {
+  return Object.keys(obj).map((key) => obj[key]);
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "white",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+const getProcessedSearchResults = (results) => {
+  return results.map((r) => ({
+    ideaId: r.item.id,
+    data: r.item,
+  }));
+};
+
+export const SearchResultsScreen = ({ route }) => {
+  const { ideaData } = useContext(IdeaContext);
+  const searchQuery = route.params.query;
+  const ideas = getIdeasArrayFromObject(ideaData?.ideas || {});
+
+  const fuse = new Fuse(ideas, {
+    keys: ["title"],
+  });
+
+  const searchResults = fuse.search(searchQuery);
+  const processedSearchResults = getProcessedSearchResults(searchResults);
+
+  return (
+    <PageFrame>
+      <IdeaList ideas={processedSearchResults} />
+    </PageFrame>
+  );
+};

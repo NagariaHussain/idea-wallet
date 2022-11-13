@@ -14,7 +14,7 @@ export const IdeaList = ({ ideas }) => {
           <IdeaListItem key={idea.ideaId} ideaData={idea.data} />
         ))
       ) : (
-        <PageSubtitle>No ideas yet</PageSubtitle>
+        <PageSubtitle>No ideas found</PageSubtitle>
       )}
     </IdeaListContainer>
   );
