@@ -9,16 +9,27 @@ This report covers my approach and experience in designing and building this pro
 ## Features
 
 ✅ Offline data storage
+
 ✅ Emoji Picker
+
 ✅ Custom Bottom Bar
+
 ✅ Animated Floating Actions
+
 ✅ Audio Player with progress
+
 ✅ Voice recorder
+
 ✅ Use of Clipboard API
+
 ✅ Nested Navigation using React Navigation
+
 ✅ Custom Fonts
+
 ✅ Image Picker & View
+
 ✅ Styled components with Theming
+
 
 ## Running the app locally
 
