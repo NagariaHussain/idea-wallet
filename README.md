@@ -1,37 +1,35 @@
 ![](.github/images/hero.png)
 
-# The Idea Wallet App
-
-## Running the app locally
-
-* Extract the ZIP files locally and open a terminal window at the root of `idea-wallet` folder
-* Make sure you have expo-cli installed
-* Run `yarn` to install dependencies
-* Run `npx expo start` to start the expo server
-* [iOS Recommended] Either use the QR code to run the app on your phone (using Expo Go app)
-* Or press `i` to launch the app on iOS simulator (assuming if you have that installed)
-
-## Expo Snack Link
-
-<https://snack.expo.dev/@hussain786/67fe7f>
-
-Even though, I have uploaded the project to expo snack playground, it doesn't work. They have some bugs related to installing dependencies (for instance svg transformation and image viewing library). Hence, I suggest running the app locally for testing purposes.
-
 ## Introduction
 
 Introducing the **Idea Wallet** app. Built with React Native (expo).
 
 This report covers my approach and experience in designing and building this product from scratch and end-to-end. Basically, I got too carried away and no longer considered this as a college project but as an app for real users and for publishing to the app stores.
 
-## Demo Video
+## Features
 
-The hands-on video gives a much better overview of the app than it is possible with words and screenshots. So, please check it out before proceeding.
+✅ Offline data storage
+✅ Emoji Picker
+✅ Custom Bottom Bar
+✅ Animated Floating Actions
+✅ Audio Player with progress
+✅ Voice recorder
+✅ Use of Clipboard API
+✅ Nested Navigation using React Navigation
+✅ Custom Fonts
+✅ Image Picker & View
+✅ Styled components with Theming
 
-Video Link: <"TODO: Update Link"> [YouTube](https://hussain.codes)
+## Running the app locally
 
-## Version Control
+```
+git clone https://github.com/NagariaHussain/idea-wallet
+cd idea-wallet
+yarn # install dependencies
+npx expo start
+```
 
-I used Git/GitHub to version control my source code. I have included the commit log (the output of running `git log`) in a "commit.log" file located at the root of the project. There are about 106 commit!
+[iOS Recommended] Either use the QR code to run the app on your phone (using Expo Go app) Or press `i` to launch the app on iOS simulator (assuming if you have that installed)
 
 ## Ideation
 
